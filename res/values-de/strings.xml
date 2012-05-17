@@ -3,9 +3,9 @@
     
     <string name="app_name">Silent Boot</string>
 <string name="labelAirplaneToggle">Flugmodus Umschalter aktivieren</string>
-<string name="labelEnable">Silent Boot aktivieren</string>
+<string name="labelEnable">Silent Boot aktivieren</string><string name="labelCompatibilityToggle">Kompatibilitätsmodus aktivieren</string>
 <string name="textEnabled">Das Gerät wird beim Herunterfahren stumm geschaltet.</string>
 <string name="textDisabled">Das Gerät wird beim Herunterfahren NICHT stumm geschaltet. Der Startsound wird abgespielt, wenn das Gerät mit aktivierten Tönen heruntergefahren wird.</string>
 <string name="textAirplaneDisabled">Der Flugmodus wird beim Herunterfahren NICHT deaktiviert. Silent Boot funktioniert bei aktivem Flugmodus evtl. nicht.</string>
-<string name="textAirplaneEnabled">Der Flugmodus wird beim Herunterfahren deaktiviert und bei Systemstart wiederhergestellt.</string>
+<string name="textAirplaneEnabled">Der Flugmodus wird beim Herunterfahren deaktiviert und bei Systemstart wiederhergestellt.</string><string name="notificationEnabled">Kompatibilitätsmodus aktiviert.</string><string name="notificationTitle">Silent Boot</string>
 </resources>

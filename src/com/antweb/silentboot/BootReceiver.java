@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.provider.Settings;
-//import android.util.Log;
+import android.util.Log;
 
 /**
  * Restores previous state at boot-up.
@@ -26,7 +26,6 @@ public class BootReceiver extends BroadcastReceiver {
 	 */
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		//Log.d("SilentBoot","BootReceiver received " + intent.toString());
 		SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
 		
 		if(settings.getBoolean("enabled", true)) {
@@ -48,7 +47,7 @@ public class BootReceiver extends BroadcastReceiver {
 				if(lastairplanemode != -1 && lastairplanemode != 0) {
 						
 					//Log.d("SilentBoot","Trying to set airplane mode to "+ lastairplanemode);
-					Settings.System.putInt(context.getContentResolver(),Settings.System.AIRPLANE_MODE_ON, lastairplanemode);
+					Settings.System.putInt(context.getContentResolver(), Settings.System.AIRPLANE_MODE_ON, lastairplanemode);
 					
 					Intent changeintent = new Intent(Intent.ACTION_AIRPLANE_MODE_CHANGED);
 					changeintent.putExtra("state", lastairplanemode);
@@ -58,6 +57,15 @@ public class BootReceiver extends BroadcastReceiver {
 					
 				}
 
+			}
+			
+			//Start notification
+			if(settings.getBoolean("compatibility", false)) {
+				Log.d("SilentBoot", "Trying to launch activity...");
+				Intent intent_notify = new Intent(context, SilentBoot.class);
+				intent_notify.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); 
+				intent_notify.putExtra("notify", true);
+				context.startActivity(intent_notify);
 			}
 
 		} else {

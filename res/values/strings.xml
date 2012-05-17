@@ -2,10 +2,13 @@
 <resources>
     
     <string name="app_name">Silent Boot</string>
-<string name="labelAirplaneToggle">Enable Airplane mode toggle</string>
+<string name="labelAirplaneToggle">Enable airplane mode toggle</string>
 <string name="labelEnable">Enable Silent Boot</string>
-<string name="textEnabled">Device will be muted on shutdown.</string>
+<string name="labelCompatibilityToggle">Enable compatibility mode</string><string name="textEnabled">Device will be muted on shutdown.</string>
 <string name="textDisabled">Device will NOT be muted on shutdown.\nBoot sound is played if the device is shut down with sounds enabled.</string>
 <string name="textAirplaneDisabled">Airplane mode will NOT be disabled on shutdown.\nSilent Boot might not work when the phone is shut down with airplane mode enabled.</string>
 <string name="textAirplaneEnabled">Airplane mode will be disabled on shutdown and restored after boot.</string>
+<string name="notificationEnabled">Compatibility mode enabled.</string>
+<string name="notificationTitle">Silent Boot</string>
+
 </resources>
