@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string name="app_name">Silent Boot</string>
+<string name="labelEnabled">Enable Silent Boot</string>
+<string name="textEnabled">Device is muted on shutdown.</string>
+<string name="textDisabled">Device is NOT muted on shutdown.\nBoot sound is played if the device is shut down with sounds enabled.</string>
+</resources>
