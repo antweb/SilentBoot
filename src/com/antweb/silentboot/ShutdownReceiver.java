@@ -27,8 +27,6 @@ public class ShutdownReceiver extends BroadcastReceiver {
      */
     @Override
     public void onReceive(Context context, Intent intent) {
-        // Log.d("SilentBoot","ShutdownReceiver received " +
-        // intent.toString());
         SharedPreferences settings = context
                 .getSharedPreferences(PREFS_NAME, 0);
 
@@ -40,13 +38,8 @@ public class ShutdownReceiver extends BroadcastReceiver {
             SharedPreferences.Editor editor = settings.edit();
             editor.putInt("lastmode", lastmode);
             editor.commit();
-            // Log.d("SilentBoot","Mode " + lastmode + " saved");
 
-            // Log.d("SilentBoot","Trying to set mode " +
-            // AudioManager.RINGER_MODE_SILENT);
             audiomanager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
-            // Log.d("SilentBoot","Mode is " +
-            // audiomanager.getRingerMode());
 
             if (settings.getBoolean("airplanetoggle", false)) {
                 // Save current state
@@ -57,18 +50,10 @@ public class ShutdownReceiver extends BroadcastReceiver {
 
                 // Deactivate airplane mode if necessary
                 if (lastairplanemode != 0) {
-                    // Log.d("SilentBoot","Trying to set airplane mode to 0");
                     Settings.System.putInt(context.getContentResolver(),
                             Settings.System.AIRPLANE_MODE_ON, 0);
-                    // Log.d("SilentBoot","Airplane mode is "
-                    // +
-                    // Settings.System.getInt(context.getContentResolver(),
-                    // Settings.System.AIRPLANE_MODE_ON,
-                    // 0));
                 }
             }
-        } else {
-            // Log.d("SilentBoot","Silent Boot disabled");
         }
     }
 }
