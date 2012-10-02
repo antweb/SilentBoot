@@ -44,8 +44,7 @@
         <receiver
             android:name=".ShutdownReceiver"
             android:enabled="true"
-            android:exported="true"
-            android:process=":com.antweb.silentboot.shutdown" >
+            android:exported="true" >
             <intent-filter android:priority="9999" >
                 <action android:name="android.intent.action.ACTION_SHUTDOWN" />
             </intent-filter>
