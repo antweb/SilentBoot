@@ -1,56 +1,63 @@
-<ScrollView android:layout_width="match_parent" 
-	android:layout_height="wrap_content" 
-	android:id="@+id/scrollView1"
-	android:fillViewport="true"
-	xmlns:android="http://schemas.android.com/apk/res/android">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fillViewport="true" >
 
-	<LinearLayout android:id="@+id/LinearLayout01" 
-		android:layout_width="fill_parent" 
-		android:layout_height="fill_parent" 
-		android:orientation="vertical">
+    <LinearLayout
+        android:id="@+id/LinearLayout01"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
 
-		<CheckBox android:text="@string/labelEnable" 
-			android:id="@+id/checkBoxEnable" 
-			android:layout_height="wrap_content" 
-			android:checked="false" 
-			android:layout_gravity="center_horizontal" 
-			android:layout_margin="10dip" 
-			android:layout_width="fill_parent" android:paddingLeft="50dip">
-		</CheckBox>
-		
-		<CheckBox android:text="@string/labelAirplaneToggle" 
-			android:id="@+id/checkBoxAirplaneToggle" 
-			android:layout_height="wrap_content" 
-			android:checked="false" 
-			android:layout_gravity="center_horizontal" 
-			android:layout_margin="10dip" 
-			android:layout_width="fill_parent" android:paddingLeft="50dip">
-		</CheckBox>
-		
-		<CheckBox android:text="@string/labelCompatibilityToggle" 
-			android:id="@+id/checkBoxCompatibiblityToggle"
-			android:layout_height="wrap_content" 
-			android:checked="false" 
-			android:layout_gravity="center_horizontal" 
-			android:layout_margin="10dip" 
-			android:layout_width="fill_parent" android:paddingLeft="50dip">
-		</CheckBox>
-	
-		<TextView android:id="@+id/textStatus" 
-			android:layout_width="fill_parent" 
-			android:layout_height="wrap_content" 
-			android:gravity="center"
-			android:layout_margin="10dip" >
-		</TextView>		
-		
-		<TextView android:id="@+id/textAirplaneStatus" 
-			android:layout_width="fill_parent" 
-			android:layout_height="wrap_content" 
-			android:gravity="center"
-			android:layout_margin="10dip" >
-		</TextView>
+        <CheckBox
+            android:id="@+id/checkBoxEnable"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dip"
+            android:checked="false"
+            android:paddingLeft="50dip"
+            android:text="@string/labelEnable" >
+        </CheckBox>
 
-	</LinearLayout>
-	
+        <CheckBox
+            android:id="@+id/checkBoxAirplaneToggle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dip"
+            android:checked="false"
+            android:paddingLeft="50dip"
+            android:text="@string/labelAirplaneToggle" >
+        </CheckBox>
+
+        <CheckBox
+            android:id="@+id/checkBoxCompatibiblityToggle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dip"
+            android:checked="false"
+            android:paddingLeft="50dip"
+            android:text="@string/labelCompatibilityToggle" >
+        </CheckBox>
+
+        <TextView
+            android:id="@+id/textStatus"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dip"
+            android:gravity="center" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/textAirplaneStatus"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dip"
+            android:gravity="center" >
+        </TextView>
+    </LinearLayout>
+
 </ScrollView>
-
