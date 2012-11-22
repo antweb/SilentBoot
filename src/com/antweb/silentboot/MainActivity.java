@@ -16,6 +16,7 @@ import android.preference.PreferenceManager;
 public class MainActivity extends PreferenceActivity implements OnSharedPreferenceChangeListener {
 
     static final String PREF_KEY_ENABLED = "enabled";
+    static final String PREF_KEY_EXTENDED = "extended";
     static final String PREF_KEY_COMPAT = "compatibility";
     static final String PREF_KEY_AIRPLANETOGGLE = "airplanetoggle";
 
@@ -71,6 +72,15 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
                 setAdvancedEnabled(false);
                 stopNotification();
             }
+        } else if (key.equals(PREF_KEY_EXTENDED)) {
+            CheckBoxPreference prefExtended = (CheckBoxPreference) findPreference(PREF_KEY_EXTENDED);
+            boolean extended = prefExtended.isChecked();
+
+            if (extended) {
+                prefExtended.setSummary(R.string.summaryExtendedEnabled);
+            } else {
+                prefExtended.setSummary(R.string.summaryExtendedDisabled);
+            }
         } else if (key.equals(PREF_KEY_COMPAT)) {
             CheckBoxPreference prefCompat = (CheckBoxPreference) findPreference(PREF_KEY_COMPAT);
             boolean compat = prefCompat.isChecked();
@@ -101,12 +111,16 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
      */
     @SuppressWarnings("deprecation")
     protected void setAdvancedEnabled(boolean enabled) {
+        Preference prefExtended = findPreference(PREF_KEY_EXTENDED);
         Preference prefCompat = findPreference(PREF_KEY_COMPAT);
         Preference prefAirplaneToggle = findPreference(PREF_KEY_AIRPLANETOGGLE);
+
         if (enabled) {
+            prefExtended.setEnabled(true);
             prefCompat.setEnabled(true);
             prefAirplaneToggle.setEnabled(true);
         } else {
+            prefExtended.setEnabled(false);
             prefCompat.setEnabled(false);
             prefAirplaneToggle.setEnabled(false);
         }
@@ -115,6 +129,7 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
     @SuppressWarnings("deprecation")
     protected void setSummaries() {
         Preference prefEnabled = findPreference(PREF_KEY_ENABLED);
+        Preference prefExtended = findPreference(PREF_KEY_EXTENDED);
         Preference prefCompat = findPreference(PREF_KEY_COMPAT);
         Preference prefAirplaneToggle = findPreference(PREF_KEY_AIRPLANETOGGLE);
 
@@ -124,6 +139,11 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
             prefEnabled.setSummary(R.string.summaryEnabled);
         else
             prefEnabled.setSummary(R.string.summaryDisabled);
+
+        if (sharedPrefs.getBoolean("extended", false))
+            prefExtended.setSummary(R.string.summaryExtendedEnabled);
+        else
+            prefExtended.setSummary(R.string.summaryExtendedDisabled);
 
         if (sharedPrefs.getBoolean("compatibility", false))
             prefCompat.setSummary(R.string.summaryCompatEnabled);

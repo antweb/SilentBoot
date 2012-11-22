@@ -28,27 +28,37 @@ public class ShutdownReceiver extends BroadcastReceiver {
         if (settings.getBoolean("enabled", true)) {
             AudioManager audiomanager = (AudioManager) context
                     .getSystemService(Context.AUDIO_SERVICE);
-            int lastmode = audiomanager.getRingerMode();
 
             SharedPreferences.Editor editor = settings.edit();
-            editor.putInt("lastmode", lastmode);
-            editor.commit();
+            editor.putInt("last_ringer_mode", audiomanager.getRingerMode());
 
             audiomanager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
 
+            // Extended workaround
+            if (settings.getBoolean("extended", false)) {
+                editor.putInt("last_sys_vol", audiomanager.getStreamVolume(AudioManager.STREAM_SYSTEM));
+                editor.putInt("last_notification_vol", audiomanager.getStreamVolume(AudioManager.STREAM_NOTIFICATION));
+
+                audiomanager.setStreamVolume(AudioManager.STREAM_SYSTEM, 0, 0);
+                audiomanager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, 0, 0);
+            }
+
+            // Airplane mode toggle
             if (settings.getBoolean("airplanetoggle", false)) {
                 // Save current state
-                int lastairplanemode = Settings.System.getInt(
+                int lastAirplaneMode = Settings.System.getInt(
                         context.getContentResolver(),
                         Settings.System.AIRPLANE_MODE_ON, 0);
-                editor.putInt("lastairplanemode", lastairplanemode);
+                editor.putInt("last_airplane_mode", lastAirplaneMode);
 
                 // Deactivate airplane mode if necessary
-                if (lastairplanemode != 0) {
+                if (lastAirplaneMode != 0) {
                     Settings.System.putInt(context.getContentResolver(),
                             Settings.System.AIRPLANE_MODE_ON, 0);
                 }
             }
+
+            editor.commit();
         }
     }
 }
