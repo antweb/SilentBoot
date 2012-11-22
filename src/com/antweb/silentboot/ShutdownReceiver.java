@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
+import android.preference.PreferenceManager;
 import android.provider.Settings;
 
 /**
@@ -15,11 +16,6 @@ import android.provider.Settings;
 public class ShutdownReceiver extends BroadcastReceiver {
 
     /**
-     * Preference file name
-     */
-    public static final String PREFS_NAME = "silentbootpref";
-
-    /**
      * onReceive method
      *
      * @param context
@@ -27,8 +23,7 @@ public class ShutdownReceiver extends BroadcastReceiver {
      */
     @Override
     public void onReceive(Context context, Intent intent) {
-        SharedPreferences settings = context
-                .getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
 
         if (settings.getBoolean("enabled", true)) {
             AudioManager audiomanager = (AudioManager) context

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
+import android.preference.PreferenceManager;
 import android.provider.Settings;
 
 /**
@@ -14,8 +15,6 @@ import android.provider.Settings;
  */
 public class BootReceiver extends BroadcastReceiver {
 
-    public static final String PREFS_NAME = "silentbootpref";
-
     /**
      * onReceive method
      *
@@ -24,8 +23,7 @@ public class BootReceiver extends BroadcastReceiver {
      */
     @Override
     public void onReceive(Context context, Intent intent) {
-        SharedPreferences settings = context
-                .getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
 
         if (settings.getBoolean("enabled", true)) {
             int mode = settings.getInt("lastmode",
@@ -53,7 +51,7 @@ public class BootReceiver extends BroadcastReceiver {
 
             // Start notification
             if (settings.getBoolean("compatibility", false)) {
-                Intent intent_notify = new Intent(context, SilentBoot.class);
+                Intent intent_notify = new Intent(context, MainActivity.class);
                 intent_notify.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent_notify.putExtra("notify", true);
                 context.startActivity(intent_notify);
