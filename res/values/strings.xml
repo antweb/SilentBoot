@@ -5,6 +5,7 @@
 <string name="labelAirplaneToggle">Enable airplane mode toggle</string>
 <string name="labelEnable">Enable Silent Boot</string>
 <string name="labelCompatibilityToggle">Enable compatibility mode</string>
+<string name="labelHelp">Help</string>
 <string name="summaryEnabled">Device will be muted on shutdown</string>
 <string name="summaryDisabled">Device will NOT be muted on shutdown</string>
 <string name="summaryAirplaneToggleDisabled">Airplane mode will NOT be disabled on shutdown</string>
@@ -15,5 +16,6 @@
 <string name="notificationEnabled">Compatibility mode enabled</string>
 <string name="pref_category_basic">Basic</string>
 <string name="pref_category_advanced">Advanced</string>
+<string name="pref_category_help">Help</string>
 
 </resources>

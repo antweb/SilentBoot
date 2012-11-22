@@ -34,6 +34,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".HelpActivity" />
+
         <receiver
             android:name=".BootReceiver"
             android:enabled="true"
