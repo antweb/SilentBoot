@@ -26,12 +26,14 @@ public class BootReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
 
-        if (settings.getBoolean("enabled", true)) {
-            int mode = settings.getInt("last_ringer_mode",
-                    AudioManager.RINGER_MODE_SILENT);
+        if (settings.getBoolean("enabled", false)) {
+            int mode = settings.getInt("last_ringer_mode", -1);
             AudioManager audiomanager = (AudioManager) context
                     .getSystemService(Context.AUDIO_SERVICE);
-            audiomanager.setRingerMode(mode);
+
+            // Classic workaround
+            if (mode != -1)
+                audiomanager.setRingerMode(mode);
 
             // Extended workaround
             int lastSysVol = settings.getInt("last_sys_vol", -1);
