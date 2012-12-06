@@ -1,13 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/sv_help_outer"
+    style="@style/help_outer" >
 
-    <TextView
-        android:id="@+id/textView_content"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Coming soon" />
+        android:orientation="vertical" >
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/tv_silent_boot_title"
+            style="?android:attr/listSeparatorTextViewStyle"
+            android:text="@string/help_title_silentboot" />
+        <TextView
+            android:id="@+id/tv_silent_boot_text"
+            style="@style/help_text"
+            android:text="@string/help_text_silentboot" />
+
+        <TextView
+            android:id="@+id/tv_extended_title"
+            style="?android:attr/listSeparatorTextViewStyle"
+            android:text="@string/help_title_extended" />
+        <TextView
+            android:id="@+id/tv_extended_text"
+            style="@style/help_text"
+            android:text="@string/help_text_extended" />
+
+        <TextView
+            android:id="@+id/tv_compat_title"
+            style="?android:attr/listSeparatorTextViewStyle"
+            android:text="@string/help_title_compat" />
+        <TextView
+            android:id="@+id/tv_compat_text"
+            style="@style/help_text"
+            android:text="@string/help_text_compat" />
+
+        <TextView
+            android:id="@+id/tv_airplane_toggle_title"
+            style="?android:attr/listSeparatorTextViewStyle"
+            android:text="@string/help_title_airplanetoggle" />
+        <TextView
+            android:id="@+id/tv_airplane_toggle_text"
+            style="@style/help_text"
+            android:text="@string/help_text_airplanetoggle" />
+
+    </LinearLayout>
+
+</ScrollView>
