@@ -1,11 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+
     <string name="app_name">Silent Boot</string>
-<string name="labelAirplaneToggle">Flugmodus Umschalter aktivieren</string>
-<string name="labelEnable">Silent Boot aktivieren</string><string name="labelCompatibilityToggle">Kompatibilitätsmodus aktivieren</string>
-<string name="textEnabled">Das Gerät wird beim Herunterfahren stumm geschaltet.</string>
-<string name="textDisabled">Das Gerät wird beim Herunterfahren NICHT stumm geschaltet. Der Startsound wird abgespielt, wenn das Gerät mit aktivierten Tönen heruntergefahren wird.</string>
-<string name="textAirplaneDisabled">Der Flugmodus wird beim Herunterfahren NICHT deaktiviert. Silent Boot funktioniert bei aktivem Flugmodus evtl. nicht.</string>
-<string name="textAirplaneEnabled">Der Flugmodus wird beim Herunterfahren deaktiviert und bei Systemstart wiederhergestellt.</string><string name="notificationEnabled">Kompatibilitätsmodus aktiviert.</string><string name="notificationTitle">Silent Boot</string>
+    <string name="activity_label_help">Hilfe</string>
+
+    <string name="notificationTitle">Silent Boot</string>
+    <string name="notificationEnabled">Kompatibilitätsmodus aktiv</string>
+
+    <string name="labelEnable">Silent Boot aktivieren</string>
+    <string name="labelExtended">Erweiterten Modus aktivieren</string>
+    <string name="labelCompatibilityToggle">Kompatibilitätsmodus aktivieren</string>
+    <string name="labelAirplaneToggle">Flugmodus Umschalter aktivieren</string>
+    <string name="labelHelp">Hilfe</string>
+    <string name="summaryEnabled">Das Gerät wird beim Herunterfahren stumm geschaltet</string>
+    <string name="summaryDisabled">Das Gerät wird beim Herunterfahren NICHT stumm geschaltet</string>
+    <string name="summaryExtendedEnabled">Verwende erweiterten Workaround</string>
+    <string name="summaryExtendedDisabled">Verwende einfachen Workaround</string>
+    <string name="summaryAirplaneToggleDisabled">Der Flugmodus wird beim Herunterfahren NICHT deaktiviert</string>
+    <string name="summaryAirplaneToggleEnabled">Der Flugmodus wird beim Herunterfahren deaktiviert</string>
+    <string name="summaryCompatEnabled">Kompatibilitätsmodus aktiviert</string>
+    <string name="summaryCompatDisabled">Kompatibilitätsmodus deaktiviert</string>
+
+    <string name="pref_category_basic">Grundeinstellungen</string>
+    <string name="pref_category_advanced">Erweiterte Einstellungen</string>
+    <string name="pref_category_help">Hilfe</string>
+    <string name="help_title_silentboot">Silent Boot</string>
+    <string name="help_text_silentboot">Silent Boot schaltet das Gerät beim Herunterfahren stumm um den Startsound zu unterdrücken und stellt den ursprünglichem Modus wieder her, sobald das Gerät wieder hochfährt.\n</string>
+    <string name="help_title_extended">Erweiterter Modus</string>
+    <string name="help_text_extended">Beim erweiterten Modus werden auch andere Lautstärken leiser/stumm geschaltet um Geräte zu unterstützen, bei denen der einfache Workaround keine Wirkung zeigt. Dies kann jedoch die Lautstärkeeinstellungen verändern, sollte Silent Boot die vorherigen Werte nicht wiederherstellen können. Daher sollte diese Option nur aktiviert werden, wenn Silent Boot den Startsound nicht unterdrückt.\n</string>
+    <string name="help_title_compat">Kompatibilitätsmodus</string>
+    <string name="help_text_compat">Der Kompatibilitätsmodus verbessert die Zuverlässigkeit auf Geräten mit wenig Systemspeicher. Die Benachrichtigung macht es unwahrscheinlicher, dass Silent Boot vom System automatisch beendet wird, wenn der Speicher knapp wird.\n</string>
+    <string name="help_title_airplanetoggle">Flugmodus Umschalter</string>
+    <string name="help_text_airplanetoggle">Wird das Gerät mit aktiviertem Flumodus heruntergefahren, könnte dies die Funktion von Silent Boot beeinträchtigen. Diese Option deaktiviert den Flugmodus vor dem Herunterfahren und stellt den ursprünglichen Modus wieder her, sobald das Gerät wieder hochfährt. DAS GERÄT WIRD DANN OHNE FLUGMODUS HOCHFAHREN! Sollte nur aktiviert werden, wenn Silent Boot bei eingeschaltetem Flumodus nicht korrekt funktioniert.\n</string>
+
 </resources>
