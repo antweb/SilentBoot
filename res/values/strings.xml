@@ -7,10 +7,10 @@
     <string name="notificationTitle">Silent Boot</string>
     <string name="notificationEnabled">Compatibility mode enabled</string>
 
-    <string name="labelEnable">Enable Silent Boot</string>
-    <string name="labelExtended">Enable extended mode</string>
-    <string name="labelCompatibilityToggle">Enable compatibility mode</string>
-    <string name="labelAirplaneToggle">Enable airplane mode toggle</string>
+    <string name="labelEnable">Silent Boot</string>
+    <string name="labelExtended">Extended mode</string>
+    <string name="labelCompatibilityToggle">Compatibility mode</string>
+    <string name="labelAirplaneToggle">Airplane mode toggle</string>
     <string name="labelHelp">Help</string>
     <string name="summaryEnabled">Device will be muted on shutdown</string>
     <string name="summaryDisabled">Device will NOT be muted on shutdown</string>
@@ -25,12 +25,12 @@
     <string name="pref_category_advanced">Advanced</string>
     <string name="pref_category_help">Help</string>
     <string name="help_title_silentboot">Silent Boot</string>
-    <string name="help_text_silentboot">Silent Boot mutes your phone on shutdown to keep it quiet on boot and restores the previous ringer mode after startup.\n</string>
+    <string name="help_text_silentboot">Silent Boot mutes your phone on shutdown to keep it quiet on boot and restores the previous ringer mode after startup is complete.\n</string>
     <string name="help_title_extended">Extended mode</string>
     <string name="help_text_extended">In extended mode other volume levels are muted/lowered as well to support some phones where the classic workaround shows no effect. This might change the phone\'s volume levels if Silent Boot fails to restore the previous values on boot. Only use when Silent Boot does not mute the startup sound.\n</string>
     <string name="help_title_compat">Compatibility mode</string>
     <string name="help_text_compat">Compatibility mode improves reliability on phones with low memory. It creates a notification that makes it less likely that the app is killed by the system when it\'s running out of memory.\n</string>
     <string name="help_title_airplanetoggle">Airplane mode toggle</string>
-    <string name="help_text_airplanetoggle">Shutting down the phone with airplane mode enabled might prevent Silent Boot from working properly. This option disables airplane mode before shutdown and restores it during boot. THIS WILL BOOT UP YOUR PHONE WITHOUT AIRPLANE MODE! Only enable if you are experiencing issues with Silent Boot and airplane mode!\n</string>
+    <string name="help_text_airplanetoggle">Shutting down the phone with airplane mode enabled might prevent Silent Boot from working properly. This option disables airplane mode before shutdown and restores it after startup is complete. THIS WILL BOOT UP YOUR PHONE WITHOUT AIRPLANE MODE! Only enable if you are experiencing issues with Silent Boot and airplane mode!\n</string>
 
 </resources>
