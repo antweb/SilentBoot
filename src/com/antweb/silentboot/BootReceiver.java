@@ -36,14 +36,10 @@ public class BootReceiver extends BroadcastReceiver {
                 audiomanager.setRingerMode(mode);
 
             // Extended workaround
-            int lastSysVol = settings.getInt("last_sys_vol", -1);
-            if (lastSysVol != -1)
-                audiomanager.setStreamVolume(AudioManager.STREAM_SYSTEM, lastSysVol, 0);
-
-            int lastNotificationVol = settings.getInt("last_sys_vol", -1);
-            if (lastNotificationVol != -1)
-                audiomanager.setStreamVolume(AudioManager.STREAM_NOTIFICATION,
-                        lastNotificationVol, 0);
+            if (settings.getBoolean("extended", false)) {
+                audiomanager.setStreamVolume(AudioManager.STREAM_SYSTEM, settings.getInt("last_sys_vol", 0), 0);
+                audiomanager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, settings.getInt("last_notification_vol", 0), 0);
+            }
 
             // Airplane toggle
             if (settings.getBoolean("airplanetoggle", false)) {
