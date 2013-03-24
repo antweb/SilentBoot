@@ -16,6 +16,8 @@ import android.provider.Settings;
  */
 public class BootReceiver extends BroadcastReceiver {
 
+    private final int RESTORE_DELAY = 5000;
+
     /**
      * onReceive method
      *
@@ -27,6 +29,12 @@ public class BootReceiver extends BroadcastReceiver {
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
 
         if (settings.getBoolean("enabled", false)) {
+            try {
+                Thread.sleep(RESTORE_DELAY);
+            } catch (InterruptedException e) {
+
+            }
+
             int mode = settings.getInt("last_ringer_mode", -1);
             AudioManager audiomanager = (AudioManager) context
                     .getSystemService(Context.AUDIO_SERVICE);
