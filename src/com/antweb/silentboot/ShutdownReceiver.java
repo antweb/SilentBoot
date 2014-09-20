@@ -30,9 +30,6 @@ public class ShutdownReceiver extends BroadcastReceiver {
                     .getSystemService(Context.AUDIO_SERVICE);
 
             SharedPreferences.Editor editor = settings.edit();
-            editor.putInt("last_ringer_mode", audiomanager.getRingerMode());
-
-            audiomanager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
 
             // Extended workaround
             if (settings.getBoolean("extended", false)) {
@@ -42,6 +39,10 @@ public class ShutdownReceiver extends BroadcastReceiver {
                 audiomanager.setStreamVolume(AudioManager.STREAM_SYSTEM, 0, 0);
                 audiomanager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, 0, 0);
             }
+
+            // Classic workaround
+            editor.putInt("last_ringer_mode", audiomanager.getRingerMode());
+            audiomanager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
 
             // Airplane mode toggle
             if (settings.getBoolean("airplanetoggle", false)) {
