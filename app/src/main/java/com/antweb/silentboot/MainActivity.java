@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
@@ -168,22 +170,18 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
         else
             drawableid = R.drawable.status_froyo;
 
-        Notification notification = new Notification(drawableid,
-                getString(R.string.notificationEnabled),
-                System.currentTimeMillis());
-        notification.flags |= Notification.FLAG_ONGOING_EVENT;
-        notification.flags |= Notification.FLAG_NO_CLEAR;
+        Notification.Builder builder = new Notification.Builder(MainActivity.this);
 
-        Intent intent = new Intent(this, MainActivity.class);
-        PendingIntent pendingintent = PendingIntent.getActivity(this, 0,
-                intent, 0);
-
-        notification.setLatestEventInfo(getApplicationContext(),
-                getString(R.string.notificationTitle),
-                getString(R.string.notificationEnabled), pendingintent);
+        builder.setContentTitle(getString(R.string.notificationTitle));
+        builder.setContentText(getString(R.string.notificationEnabled));
+        builder.setSmallIcon(drawableid);
+        builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.icon));
+        builder.setAutoCancel(false);
+        builder.setOngoing(true);
+        builder.build();
 
         NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        nm.notify(NOTIFICATION_ID, notification);
+        nm.notify(NOTIFICATION_ID, builder.build());
     }
 
     /**
