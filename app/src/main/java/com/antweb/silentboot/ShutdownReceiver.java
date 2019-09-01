@@ -10,7 +10,7 @@ import android.provider.Settings;
 
 /**
  * Handles mute on shutdown.
- * 
+ *
  * @author Anton Weber (ant@antweb.me)
  */
 public class ShutdownReceiver extends BroadcastReceiver {

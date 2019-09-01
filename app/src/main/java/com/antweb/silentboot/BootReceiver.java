@@ -1,4 +1,3 @@
-
 package com.antweb.silentboot;
 
 import android.content.BroadcastReceiver;
@@ -11,7 +10,7 @@ import android.provider.Settings;
 
 /**
  * Restores previous state at boot-up.
- * 
+ *
  * @author Anton Weber (ant@antweb.me)
  */
 public class BootReceiver extends BroadcastReceiver {
