@@ -6,7 +6,7 @@ android {
     defaultConfig {
         applicationId "com.antweb.silentboot"
         minSdkVersion 7
-        targetSdkVersion 16
+        targetSdkVersion 27
         versionCode 18
         versionName "2.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
