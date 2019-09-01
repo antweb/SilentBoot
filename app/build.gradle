@@ -5,7 +5,7 @@ android {
     buildToolsVersion "29.0.1"
     defaultConfig {
         applicationId "com.antweb.silentboot"
-        minSdkVersion 7
+        minSdkVersion 16
         targetSdkVersion 27
         versionCode 18
         versionName "2.1"
