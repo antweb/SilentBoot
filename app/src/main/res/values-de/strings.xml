@@ -21,6 +21,10 @@
     <string name="summaryCompatEnabled">Kompatibilitätsmodus aktiviert</string>
     <string name="summaryCompatDisabled">Kompatibilitätsmodus deaktiviert</string>
 
+    <string name="permissionDialogText">Silent Boot benötigt zusätzliche Rechte, um das Gerät stumm zu schalten.\n\nBitte aktiviere den Zugriff auf \"Nicht stören\".</string>
+    <string name="permissionDialogEnable">Aktiveren</string>
+    <string name="permissionDialogCancel">Abbrechen</string>
+
     <string name="pref_category_basic">Grundeinstellungen</string>
     <string name="pref_category_advanced">Erweiterte Einstellungen</string>
     <string name="pref_category_help">Hilfe</string>

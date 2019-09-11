@@ -1,14 +1,17 @@
 package com.antweb.silentboot;
 
+import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
@@ -38,7 +41,14 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
         addPreferencesFromResource(R.xml.preferences);
 
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        setAdvancedEnabled(sharedPrefs.getBoolean("enabled", false));
+
+        boolean isEnabled = sharedPrefs.getBoolean("enabled", false);
+
+        if (isEnabled) {
+            checkPermissions();
+        }
+
+        setAdvancedEnabled(isEnabled);
         setSummaries();
     }
 
@@ -65,6 +75,8 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
             boolean enabled = prefEnabled.isChecked();
 
             if (enabled) {
+                checkPermissions();
+
                 prefEnabled.setSummary(R.string.summaryEnabled);
                 setAdvancedEnabled(true);
                 if (sharedPreferences.getBoolean("compatibility", false))
@@ -190,5 +202,37 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
     protected void stopNotification() {
         NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         nm.cancel(NOTIFICATION_ID);
+    }
+
+    /**
+     * Check permissions
+     */
+    private void checkPermissions() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            return;
+        }
+
+        NotificationManager nm = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+        if (!nm.isNotificationPolicyAccessGranted()) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage(getString(R.string.permissionDialogText));
+
+            builder.setPositiveButton(getString(R.string.permissionDialogEnable), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    Intent intent = new Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
+                    startActivityForResult(intent, 0);
+                }
+            });
+
+            builder.setNegativeButton(getString(R.string.permissionDialogCancel), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                }
+            });
+
+            builder.show();
+        }
     }
 }

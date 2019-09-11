@@ -21,6 +21,10 @@
     <string name="summaryCompatEnabled">Compatibility mode enabled</string>
     <string name="summaryCompatDisabled">Compatibility mode disabled</string>
 
+    <string name="permissionDialogText">Silent Boot requires additional permissions to mute and un-mute your phone.\n\nPlease enable Do Not Disturb access.</string>
+    <string name="permissionDialogEnable">Enable</string>
+    <string name="permissionDialogCancel">Cancel</string>
+
     <string name="pref_category_basic">Basic</string>
     <string name="pref_category_advanced">Advanced</string>
     <string name="pref_category_help">Help</string>
