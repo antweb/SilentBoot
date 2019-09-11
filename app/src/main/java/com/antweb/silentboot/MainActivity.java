@@ -175,18 +175,11 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
      */
     @SuppressWarnings("deprecation")
     protected void startNotification() {
-        int drawableid;
-
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.FROYO)
-            drawableid = R.drawable.status_gingerbread;
-        else
-            drawableid = R.drawable.status_froyo;
-
         Notification.Builder builder = new Notification.Builder(MainActivity.this);
 
         builder.setContentTitle(getString(R.string.notificationTitle));
         builder.setContentText(getString(R.string.notificationEnabled));
-        builder.setSmallIcon(drawableid);
+        builder.setSmallIcon(R.drawable.status_gingerbread);
         builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.icon));
         builder.setAutoCancel(false);
         builder.setOngoing(true);
