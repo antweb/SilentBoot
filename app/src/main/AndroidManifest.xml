@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
 
     <supports-screens
         android:anyDensity="true"
@@ -33,12 +34,22 @@
             android:name=".HelpActivity"
             android:label="@string/activity_label_help" />
 
+        <service
+            android:name=".ShutdownReceiverService"
+            android:label="@string/service_label_shutdown" />
+
         <receiver
             android:name=".BootReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter android:priority="9999">
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+            <intent-filter android:priority="9999">
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+            </intent-filter>
+            <intent-filter android:priority="9999">
+                <action android:name="android.intent.action.MY_PACKAGE_UNSUSPENDED" />
             </intent-filter>
         </receiver>
         <receiver

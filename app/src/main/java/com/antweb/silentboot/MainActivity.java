@@ -3,14 +3,12 @@ package com.antweb.silentboot;
 import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
@@ -18,12 +16,14 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 
+@SuppressWarnings("deprecation")
 public class MainActivity extends PreferenceActivity implements OnSharedPreferenceChangeListener {
 
     static final String PREF_KEY_ENABLED = "enabled";
     static final String PREF_KEY_EXTENDED = "extended";
     static final String PREF_KEY_COMPAT = "compatibility";
     static final String PREF_KEY_AIRPLANETOGGLE = "airplanetoggle";
+    static final int ON_DO_NOT_DISTURB_CALLBACK_CODE = 0;
 
     public static final int NOTIFICATION_ID = 1;
 
@@ -50,6 +50,10 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 
         setAdvancedEnabled(isEnabled);
         setSummaries();
+
+        if (isEnabled && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startForegroundService(new Intent(getApplicationContext(), ShutdownReceiverService.class));
+        }
     }
 
     @SuppressWarnings("deprecation")
@@ -70,51 +74,64 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
 
     @SuppressWarnings("deprecation")
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        if (key.equals(PREF_KEY_ENABLED)) {
-            CheckBoxPreference prefEnabled = (CheckBoxPreference) findPreference(PREF_KEY_ENABLED);
-            boolean enabled = prefEnabled.isChecked();
+        switch (key) {
+            case PREF_KEY_ENABLED:
+                CheckBoxPreference prefEnabled = (CheckBoxPreference) findPreference(PREF_KEY_ENABLED);
+                boolean enabled = prefEnabled.isChecked();
 
-            if (enabled) {
-                checkPermissions();
+                if (enabled) {
+                    checkPermissions();
 
-                prefEnabled.setSummary(R.string.summaryEnabled);
-                setAdvancedEnabled(true);
-                if (sharedPreferences.getBoolean("compatibility", false))
+                    prefEnabled.setSummary(R.string.summaryEnabled);
+                    setAdvancedEnabled(true);
+                    if (sharedPreferences.getBoolean("compatibility", false))
+                        startNotification();
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        startForegroundService(new Intent(this, ShutdownReceiverService.class));
+                    }
+                } else {
+                    prefEnabled.setSummary(R.string.summaryDisabled);
+                    setAdvancedEnabled(false);
+                    stopNotification();
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        stopService(new Intent(this, ShutdownReceiverService.class));
+                    }
+                }
+                break;
+            case PREF_KEY_EXTENDED:
+                CheckBoxPreference prefExtended = (CheckBoxPreference) findPreference(PREF_KEY_EXTENDED);
+                boolean extended = prefExtended.isChecked();
+
+                if (extended) {
+                    prefExtended.setSummary(R.string.summaryExtendedEnabled);
+                } else {
+                    prefExtended.setSummary(R.string.summaryExtendedDisabled);
+                }
+                break;
+            case PREF_KEY_COMPAT:
+                CheckBoxPreference prefCompat = (CheckBoxPreference) findPreference(PREF_KEY_COMPAT);
+                boolean compat = prefCompat.isChecked();
+
+                if (compat) {
+                    prefCompat.setSummary(R.string.summaryCompatEnabled);
                     startNotification();
-            } else {
-                prefEnabled.setSummary(R.string.summaryDisabled);
-                setAdvancedEnabled(false);
-                stopNotification();
-            }
-        } else if (key.equals(PREF_KEY_EXTENDED)) {
-            CheckBoxPreference prefExtended = (CheckBoxPreference) findPreference(PREF_KEY_EXTENDED);
-            boolean extended = prefExtended.isChecked();
+                } else {
+                    prefCompat.setSummary(R.string.summaryCompatDisabled);
+                    stopNotification();
+                }
+                break;
+            case PREF_KEY_AIRPLANETOGGLE:
+                CheckBoxPreference prefAirplaneToggle = (CheckBoxPreference) findPreference(PREF_KEY_AIRPLANETOGGLE);
+                boolean airplaneToggle = prefAirplaneToggle.isChecked();
 
-            if (extended) {
-                prefExtended.setSummary(R.string.summaryExtendedEnabled);
-            } else {
-                prefExtended.setSummary(R.string.summaryExtendedDisabled);
-            }
-        } else if (key.equals(PREF_KEY_COMPAT)) {
-            CheckBoxPreference prefCompat = (CheckBoxPreference) findPreference(PREF_KEY_COMPAT);
-            boolean compat = prefCompat.isChecked();
-
-            if (compat) {
-                prefCompat.setSummary(R.string.summaryCompatEnabled);
-                startNotification();
-            } else {
-                prefCompat.setSummary(R.string.summaryCompatDisabled);
-                stopNotification();
-            }
-        } else if (key.equals(PREF_KEY_AIRPLANETOGGLE)) {
-            CheckBoxPreference prefAirplaneToggle = (CheckBoxPreference) findPreference(PREF_KEY_AIRPLANETOGGLE);
-            boolean airplaneToggle = prefAirplaneToggle.isChecked();
-
-            if (airplaneToggle) {
-                prefAirplaneToggle.setSummary(R.string.summaryAirplaneToggleEnabled);
-            } else {
-                prefAirplaneToggle.setSummary(R.string.summaryAirplaneToggleDisabled);
-            }
+                if (airplaneToggle) {
+                    prefAirplaneToggle.setSummary(R.string.summaryAirplaneToggleEnabled);
+                } else {
+                    prefAirplaneToggle.setSummary(R.string.summaryAirplaneToggleDisabled);
+                }
+                break;
         }
     }
 
@@ -173,7 +190,6 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
     /**
      * Start the notification
      */
-    @SuppressWarnings("deprecation")
     protected void startNotification() {
         Notification.Builder builder = new Notification.Builder(MainActivity.this);
 
@@ -183,7 +199,6 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
         builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.icon));
         builder.setAutoCancel(false);
         builder.setOngoing(true);
-        builder.build();
 
         NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         nm.notify(NOTIFICATION_ID, builder.build());
@@ -210,22 +225,25 @@ public class MainActivity extends PreferenceActivity implements OnSharedPreferen
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage(getString(R.string.permissionDialogText));
 
-            builder.setPositiveButton(getString(R.string.permissionDialogEnable), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    Intent intent = new Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
-                    startActivityForResult(intent, 0);
-                }
+            builder.setPositiveButton(getString(R.string.permissionDialogEnable),  (DialogInterface dialogInterface, int i) -> {
+                Intent intent = new Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
+                startActivityForResult(intent, ON_DO_NOT_DISTURB_CALLBACK_CODE);
             });
 
-            builder.setNegativeButton(getString(R.string.permissionDialogCancel), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    dialogInterface.dismiss();
-                }
+            builder.setNegativeButton(getString(R.string.permissionDialogCancel), (DialogInterface dialogInterface, int i) -> {
+                dialogInterface.dismiss();
+                CheckBoxPreference prefEnabled = (CheckBoxPreference) findPreference(PREF_KEY_ENABLED);
+                prefEnabled.setChecked(false);
             });
 
             builder.show();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == MainActivity.ON_DO_NOT_DISTURB_CALLBACK_CODE ) {
+            checkPermissions();
         }
     }
 }

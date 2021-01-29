@@ -1,10 +1,12 @@
 package com.antweb.silentboot;
 
+import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
+import android.os.Build;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
 
@@ -18,11 +20,14 @@ public class ShutdownReceiver extends BroadcastReceiver {
     /**
      * onReceive method
      *
-     * @param context
-     * @intent intent
+     * @param context: application context
+     * @param intent: sources Intent object
      */
     @Override
     public void onReceive(Context context, Intent intent) {
+        if(!Intent.ACTION_SHUTDOWN.equals(intent.getAction()))
+            return;
+
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
 
         if (settings.getBoolean("enabled", true)) {
@@ -59,7 +64,14 @@ public class ShutdownReceiver extends BroadcastReceiver {
                 }
             }
 
-            editor.commit();
+            // Android O+ compatibility
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+                editor.putInt("last_dnd", notificationManager.getCurrentInterruptionFilter());
+                notificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_NONE);
+            }
+
+            editor.apply();
         }
     }
 }
