@@ -36,5 +36,9 @@
     <string name="help_text_compat">Compatibility mode improves reliability on phones with low memory. It creates a notification that makes it less likely that the app is killed by the system when it\'s running out of memory.\n</string>
     <string name="help_title_airplanetoggle">Airplane mode toggle</string>
     <string name="help_text_airplanetoggle">Shutting down the phone with airplane mode enabled might prevent Silent Boot from working properly. This option disables airplane mode before shutdown and restores it after startup is complete. THIS WILL BOOT UP YOUR PHONE WITHOUT AIRPLANE MODE! Only enable if you are experiencing issues with Silent Boot and airplane mode!\n</string>
+    <string name="shutdown_service_notification_title">Phone Shutdown Receiver Service</string>
+    <string name="shutdown_notification_channel_name">Phone Shutdown Receiver Service</string>
+    <string name="shutdown_notification_channel_description">Android requires a notification to run the service that is required to capture the shutdown event</string>
+    <string name="service_label_shutdown">Shutdown Service</string>
 
 </resources>
