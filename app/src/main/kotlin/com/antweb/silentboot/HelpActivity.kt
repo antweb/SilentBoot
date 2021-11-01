@@ -1,12 +1,11 @@
 package com.antweb.silentboot
 
-import android.app.Activity
-import android.os.Bundle
-import android.os.Build
 import android.annotation.TargetApi
+import android.app.Activity
 import android.content.Intent
+import android.os.Build
+import android.os.Bundle
 import android.view.MenuItem
-
 
 class HelpActivity : Activity() {
     public override fun onCreate(savedInstanceState: Bundle?) {

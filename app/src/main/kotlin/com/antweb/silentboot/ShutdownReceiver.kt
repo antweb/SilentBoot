@@ -3,11 +3,9 @@ package com.antweb.silentboot
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
-import android.preference.PreferenceManager
 import android.media.AudioManager
+import android.preference.PreferenceManager
 import android.provider.Settings
-
 
 class ShutdownReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {

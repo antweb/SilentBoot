@@ -1,19 +1,18 @@
 package com.antweb.silentboot
 
-import android.preference.PreferenceActivity
-import android.content.SharedPreferences.OnSharedPreferenceChangeListener
-import android.os.Bundle
-import android.content.SharedPreferences
-import android.preference.PreferenceManager
-import android.preference.CheckBoxPreference
-import android.graphics.BitmapFactory
-import android.app.NotificationManager
-import android.os.Build
 import android.app.AlertDialog
 import android.app.Notification
+import android.app.NotificationManager
 import android.content.Intent
+import android.content.SharedPreferences
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener
+import android.graphics.BitmapFactory
+import android.os.Build
+import android.os.Bundle
+import android.preference.CheckBoxPreference
+import android.preference.PreferenceActivity
+import android.preference.PreferenceManager
 import android.provider.Settings
-
 
 class MainActivity : PreferenceActivity(), OnSharedPreferenceChangeListener {
     public override fun onCreate(savedInstanceState: Bundle?) {

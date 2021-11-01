@@ -3,10 +3,9 @@ package com.antweb.silentboot
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.preference.PreferenceManager
 import android.media.AudioManager
+import android.preference.PreferenceManager
 import android.provider.Settings
-
 
 class BootReceiver : BroadcastReceiver() {
     private val RESTORE_DELAY = 5000
