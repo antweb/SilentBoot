@@ -1,0 +1,6 @@
+repos:
+  - repo: https://github.com/tadodotcom/ktlint-pre-commit
+    rev: "0.41.0-3"
+    hooks:
+      - id: ktlint
+        args: [-F]
