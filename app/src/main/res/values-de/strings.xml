@@ -17,11 +17,5 @@
     <string name="pref_category_help">Hilfe</string>
     <string name="help_title_silentboot">Silent Boot</string>
     <string name="help_text_silentboot">Silent Boot schaltet das Gerät beim Herunterfahren stumm, um den Startsound zu unterdrücken, und stellt den ursprünglichen Modus wieder her, nachdem das Gerät hochgefahren ist.\n</string>
-    <string name="help_title_extended">Erweiterter Modus</string>
-    <string name="help_text_extended">Beim erweiterten Modus werden auch andere Lautstärken leiser/stumm geschaltet um Geräte zu unterstützen, bei denen der einfache Workaround keine Wirkung zeigt. Dies kann jedoch die Lautstärkeeinstellungen verändern, sollte Silent Boot die vorherigen Werte nicht wiederherstellen können. Daher sollte diese Option nur aktiviert werden, wenn Silent Boot den Startsound nicht unterdrückt.\n</string>
-    <string name="help_title_compat">Kompatibilitätsmodus</string>
-    <string name="help_text_compat">Der Kompatibilitätsmodus verbessert die Zuverlässigkeit auf Geräten mit wenig Systemspeicher. Die Benachrichtigung macht es unwahrscheinlicher, dass Silent Boot vom System automatisch beendet wird, wenn der Speicher knapp wird.\n</string>
-    <string name="help_title_airplanetoggle">Flugmodus Umschalter</string>
-    <string name="help_text_airplanetoggle">Wird das Gerät mit aktiviertem Flugmodus heruntergefahren, könnte dies die Funktion von Silent Boot beeinträchtigen. Diese Option deaktiviert den Flugmodus vor dem Herunterfahren und stellt den ursprünglichen Modus wieder her, sobald das Gerät wieder hochgefahren wurde. WÄHREND DES HOCHFAHRENS IST DER FLUGMODUS JEDOCH DEAKTIVIERT! Sollte nur aktiviert werden, wenn Silent Boot bei eingeschaltetem Flugmodus nicht korrekt funktioniert.\n</string>
 
 </resources>

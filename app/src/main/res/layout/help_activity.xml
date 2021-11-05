@@ -17,33 +17,6 @@
             style="@style/help_text"
             android:text="@string/help_text_silentboot" />
 
-        <TextView
-            android:id="@+id/tv_extended_title"
-            style="?android:attr/listSeparatorTextViewStyle"
-            android:text="@string/help_title_extended" />
-        <TextView
-            android:id="@+id/tv_extended_text"
-            style="@style/help_text"
-            android:text="@string/help_text_extended" />
-
-        <TextView
-            android:id="@+id/tv_compat_title"
-            style="?android:attr/listSeparatorTextViewStyle"
-            android:text="@string/help_title_compat" />
-        <TextView
-            android:id="@+id/tv_compat_text"
-            style="@style/help_text"
-            android:text="@string/help_text_compat" />
-
-        <TextView
-            android:id="@+id/tv_airplane_toggle_title"
-            style="?android:attr/listSeparatorTextViewStyle"
-            android:text="@string/help_title_airplanetoggle" />
-        <TextView
-            android:id="@+id/tv_airplane_toggle_text"
-            style="@style/help_text"
-            android:text="@string/help_text_airplanetoggle" />
-
     </LinearLayout>
 
 </ScrollView>
