@@ -10,23 +10,6 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="@string/pref_category_advanced">
-        <CheckBoxPreference
-            android:key="extended"
-            android:title="@string/labelExtended"
-            android:defaultValue="false" />
-        <CheckBoxPreference
-            android:key="compatibility"
-            android:summary="@string/labelCompatibilityToggle"
-            android:title="@string/labelCompatibilityToggle"
-            android:defaultValue="false" />
-        <CheckBoxPreference
-            android:key="airplanetoggle"
-            android:summary="@string/labelAirplaneToggle"
-            android:title="@string/labelAirplaneToggle"
-            android:defaultValue="false" />
-    </PreferenceCategory>
-    <PreferenceCategory
         android:title="@string/pref_category_help">
         <Preference android:title="@string/labelHelp" >
 	        <intent android:targetClass="com.antweb.silentboot.HelpActivity"

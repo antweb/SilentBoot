@@ -4,29 +4,16 @@
     <string name="app_name">Silent Boot</string>
     <string name="activity_label_help">Hilfe</string>
 
-    <string name="notificationTitle">Silent Boot</string>
-    <string name="notificationEnabled">Kompatibilitätsmodus aktiv</string>
-
     <string name="labelEnable">Silent Boot</string>
-    <string name="labelExtended">Erweiterter Modus</string>
-    <string name="labelCompatibilityToggle">Kompatibilitätsmodus</string>
-    <string name="labelAirplaneToggle">Flugmodus Umschalter</string>
     <string name="labelHelp">Hilfe</string>
     <string name="summaryEnabled">Das Gerät wird beim Herunterfahren stumm geschaltet</string>
     <string name="summaryDisabled">Das Gerät wird beim Herunterfahren NICHT stumm geschaltet</string>
-    <string name="summaryExtendedEnabled">Verwende erweiterten Workaround</string>
-    <string name="summaryExtendedDisabled">Verwende einfachen Workaround</string>
-    <string name="summaryAirplaneToggleDisabled">Der Flugmodus wird beim Herunterfahren NICHT deaktiviert</string>
-    <string name="summaryAirplaneToggleEnabled">Der Flugmodus wird beim Herunterfahren deaktiviert</string>
-    <string name="summaryCompatEnabled">Kompatibilitätsmodus aktiviert</string>
-    <string name="summaryCompatDisabled">Kompatibilitätsmodus deaktiviert</string>
 
     <string name="permissionDialogText">Silent Boot benötigt zusätzliche Rechte, um das Gerät stumm zu schalten.\n\nBitte aktiviere den Zugriff auf \"Nicht stören\".</string>
     <string name="permissionDialogEnable">Aktiveren</string>
     <string name="permissionDialogCancel">Abbrechen</string>
 
     <string name="pref_category_basic">Grundeinstellungen</string>
-    <string name="pref_category_advanced">Erweiterte Einstellungen</string>
     <string name="pref_category_help">Hilfe</string>
     <string name="help_title_silentboot">Silent Boot</string>
     <string name="help_text_silentboot">Silent Boot schaltet das Gerät beim Herunterfahren stumm, um den Startsound zu unterdrücken, und stellt den ursprünglichen Modus wieder her, nachdem das Gerät hochgefahren ist.\n</string>
