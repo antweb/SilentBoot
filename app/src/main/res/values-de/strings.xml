@@ -4,6 +4,9 @@
     <string name="app_name">Silent Boot</string>
     <string name="activity_label_help">Hilfe</string>
 
+    <string name="buttonEnable">Aktivieren</string>
+    <string name="buttonDisable">Deaktivieren</string>
+
     <string name="labelEnable">Silent Boot</string>
     <string name="labelHelp">Hilfe</string>
     <string name="summaryEnabled">Das Gerät wird beim Herunterfahren stumm geschaltet</string>

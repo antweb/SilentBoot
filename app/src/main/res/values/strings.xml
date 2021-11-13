@@ -4,6 +4,9 @@
     <string name="app_name">Silent Boot</string>
     <string name="activity_label_help">Help</string>
 
+    <string name="buttonEnable">Enable</string>
+    <string name="buttonDisable">Disable</string>
+
     <string name="labelEnable">Silent Boot</string>
     <string name="labelHelp">Help</string>
     <string name="summaryEnabled">Device will be muted on shutdown</string>
