@@ -4,7 +4,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.media.AudioManager
-import android.preference.PreferenceManager
+import androidx.preference.PreferenceManager
 
 class ShutdownReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
@@ -17,6 +17,7 @@ class ShutdownReceiver : BroadcastReceiver() {
             editor.putInt("last_ringer_mode", audiomanager.ringerMode)
             audiomanager.ringerMode = AudioManager.RINGER_MODE_SILENT
 
+            // Stick to commit to be on the safe side?
             editor.commit()
         }
     }
