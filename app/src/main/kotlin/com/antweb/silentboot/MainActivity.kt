@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity() {
 
         if (isEnabled) {
             checkPermissions()
+            startService()
         }
     }
 
@@ -63,13 +64,20 @@ class MainActivity : AppCompatActivity() {
 
         if (isEnabled) {
             checkPermissions()
-
-            val intent = Intent(applicationContext, ShutdownReceiverService::class.java)
-            startForegroundService(intent)
+            startService()
         } else {
-            val intent = Intent(applicationContext, ShutdownReceiverService::class.java)
-            stopService(intent)
+            stopService()
         }
+    }
+
+    private fun startService() {
+        val intent = Intent(applicationContext, ShutdownReceiverService::class.java)
+        startForegroundService(intent)
+    }
+
+    private fun stopService() {
+        val intent = Intent(applicationContext, ShutdownReceiverService::class.java)
+        stopService(intent)
     }
 
     private fun checkPermissions() {
