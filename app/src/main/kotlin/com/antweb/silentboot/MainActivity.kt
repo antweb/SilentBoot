@@ -10,10 +10,6 @@ import androidx.preference.PreferenceManager
 import com.antweb.silentboot.databinding.MainActivityBinding
 
 class MainActivity : AppCompatActivity() {
-    companion object {
-        const val PREF_KEY_ENABLED = "enabled"
-    }
-
     private lateinit var binding: MainActivityBinding
     private var isEnabled = false
 
@@ -24,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(applicationContext)
-        isEnabled = sharedPrefs.getBoolean(PREF_KEY_ENABLED, false)
+        isEnabled = sharedPrefs.getBoolean(PreferenceKey.ENABLED.key, false)
 
         setLabels()
         binding.activateToggleButton.setOnClickListener {
@@ -57,7 +53,7 @@ class MainActivity : AppCompatActivity() {
 
         val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(applicationContext)
         val editor = sharedPrefs.edit()
-        editor.putBoolean(PREF_KEY_ENABLED, isEnabled)
+        editor.putBoolean(PreferenceKey.ENABLED.key, isEnabled)
         editor.apply()
 
         setLabels()

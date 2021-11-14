@@ -12,12 +12,12 @@ class BootReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
         val settings = PreferenceManager.getDefaultSharedPreferences(context)
-        if (settings.getBoolean("enabled", false)) {
+        if (settings.getBoolean(PreferenceKey.ENABLED.key, false)) {
             try {
                 Thread.sleep(RESTORE_DELAY.toLong())
             } catch (e: InterruptedException) {
             }
-            val mode = settings.getInt("last_ringer_mode", -1)
+            val mode = settings.getInt(PreferenceKey.LAST_RINGER_MODE.key, -1)
             val audiomanager = context
                 .getSystemService(Context.AUDIO_SERVICE) as AudioManager
 
