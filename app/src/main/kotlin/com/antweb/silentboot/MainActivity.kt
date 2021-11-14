@@ -63,6 +63,12 @@ class MainActivity : AppCompatActivity() {
 
         if (isEnabled) {
             checkPermissions()
+
+            val intent = Intent(applicationContext, ShutdownReceiverService::class.java)
+            startForegroundService(intent)
+        } else {
+            val intent = Intent(applicationContext, ShutdownReceiverService::class.java)
+            stopService(intent)
         }
     }
 
