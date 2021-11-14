@@ -16,6 +16,10 @@
     <string name="permissionDialogEnable">Aktiveren</string>
     <string name="permissionDialogCancel">Abbrechen</string>
 
+    <string name="notificationEnabled">Silent Boot is aktiv</string>
+    <string name="serviceChannelName">Dienstaktivität</string>
+    <string name="serviceChannelDescription">Zeigt, dass Silent Boot aktiv ist.\nWird benötigt, damit Silent Boot korrekt funktioniert.</string>
+
     <string name="pref_category_basic">Grundeinstellungen</string>
     <string name="pref_category_help">Hilfe</string>
     <string name="help_title_silentboot">Silent Boot</string>
