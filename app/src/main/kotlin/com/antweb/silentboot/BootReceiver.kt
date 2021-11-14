@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.media.AudioManager
+import androidx.core.content.ContextCompat.startForegroundService
 import androidx.preference.PreferenceManager
 
 class BootReceiver : BroadcastReceiver() {
@@ -22,13 +23,8 @@ class BootReceiver : BroadcastReceiver() {
 
             if (mode != -1) audiomanager.ringerMode = mode
 
-            // Start notification
-            if (settings.getBoolean("compatibility", false)) {
-                val intent_notify = Intent(context, MainActivity::class.java)
-                intent_notify.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                intent_notify.putExtra("notify", true)
-                context.startActivity(intent_notify)
-            }
+            val intent = Intent(context.applicationContext, ShutdownReceiverService::class.java)
+            startForegroundService(context.applicationContext, intent)
         }
     }
 }
