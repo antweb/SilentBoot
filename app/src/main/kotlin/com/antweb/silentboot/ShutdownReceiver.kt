@@ -8,17 +8,21 @@ import androidx.preference.PreferenceManager
 
 class ShutdownReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
-        val settings = PreferenceManager.getDefaultSharedPreferences(context)
-        if (settings.getBoolean(PreferenceKey.ENABLED.key, true)) {
-            val audiomanager = context
-                .getSystemService(Context.AUDIO_SERVICE) as AudioManager
-            val editor = settings.edit()
+        val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context)
+        val isEnabled = sharedPrefs.getBoolean(PreferenceKey.ENABLED.key, true)
 
-            editor.putInt(PreferenceKey.LAST_RINGER_MODE.key, audiomanager.ringerMode)
-            audiomanager.ringerMode = AudioManager.RINGER_MODE_SILENT
-
-            // Stick to commit to be on the safe side?
-            editor.commit()
+        if (!isEnabled) {
+            return
         }
+
+        val audioManager = context
+            .getSystemService(Context.AUDIO_SERVICE) as AudioManager
+        val editor = sharedPrefs.edit()
+
+        editor.putInt(PreferenceKey.LAST_RINGER_MODE.key, audioManager.ringerMode)
+        audioManager.ringerMode = AudioManager.RINGER_MODE_SILENT
+
+        // Stick to commit to be on the safe side?
+        editor.commit()
     }
 }

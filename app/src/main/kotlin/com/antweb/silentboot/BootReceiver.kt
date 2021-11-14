@@ -8,23 +8,30 @@ import androidx.core.content.ContextCompat.startForegroundService
 import androidx.preference.PreferenceManager
 
 class BootReceiver : BroadcastReceiver() {
-    private val RESTORE_DELAY = 5000
+    private val restoreDelay = 5000
 
     override fun onReceive(context: Context, intent: Intent) {
-        val settings = PreferenceManager.getDefaultSharedPreferences(context)
-        if (settings.getBoolean(PreferenceKey.ENABLED.key, false)) {
-            try {
-                Thread.sleep(RESTORE_DELAY.toLong())
-            } catch (e: InterruptedException) {
-            }
-            val mode = settings.getInt(PreferenceKey.LAST_RINGER_MODE.key, -1)
-            val audiomanager = context
-                .getSystemService(Context.AUDIO_SERVICE) as AudioManager
+        val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context)
+        val isEnabled = sharedPrefs.getBoolean(PreferenceKey.ENABLED.key, false)
 
-            if (mode != -1) audiomanager.ringerMode = mode
-
-            val intent = Intent(context.applicationContext, ShutdownReceiverService::class.java)
-            startForegroundService(context.applicationContext, intent)
+        if (!isEnabled) {
+            return
         }
+
+        try {
+            Thread.sleep(restoreDelay.toLong())
+        } catch (e: InterruptedException) {
+        }
+
+        val mode = sharedPrefs.getInt(PreferenceKey.LAST_RINGER_MODE.key, -1)
+        val audioManager = context
+            .getSystemService(Context.AUDIO_SERVICE) as AudioManager
+
+        if (mode != -1) {
+            audioManager.ringerMode = mode
+        }
+
+        val serviceIntent = Intent(context.applicationContext, ShutdownReceiverService::class.java)
+        startForegroundService(context.applicationContext, serviceIntent)
     }
 }
