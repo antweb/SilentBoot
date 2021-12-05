@@ -12,28 +12,37 @@
         android:id="@+id/toolbar">
     </com.google.android.material.appbar.MaterialToolbar>
 
-    <ScrollView android:id="@+id/sv_help_outer"
-        style="@style/help_outer" >
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:layout_margin="16dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                 android:text="@string/helpHowSectionHeader" />
             <TextView
-                style="@style/help_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 android:text="@string/helpHowSectionText" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                android:layout_marginTop="16dp"
                 android:text="@string/helpNotificationSectionHeader" />
             <TextView
-                style="@style/help_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 android:text="@string/helpNotificationSectionText" />
 
         </LinearLayout>
