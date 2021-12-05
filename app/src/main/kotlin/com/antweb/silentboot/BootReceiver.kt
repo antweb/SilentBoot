@@ -1,5 +1,6 @@
 package com.antweb.silentboot
 
+import android.app.NotificationManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -23,12 +24,19 @@ class BootReceiver : BroadcastReceiver() {
         } catch (e: InterruptedException) {
         }
 
-        val mode = sharedPrefs.getInt(PreferenceKey.LAST_RINGER_MODE.key, -1)
+        val lastRingerMode = sharedPrefs.getInt(PreferenceKey.LAST_RINGER_MODE.key, -1)
+        val lastDnd = sharedPrefs.getInt(PreferenceKey.LAST_DND_MODE.key, -1)
+
         val audioManager = context
             .getSystemService(Context.AUDIO_SERVICE) as AudioManager
+        val notificationManager = context
+            .getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-        if (mode != -1) {
-            audioManager.ringerMode = mode
+        if (lastRingerMode != -1) {
+            audioManager.ringerMode = lastRingerMode
+        }
+        if (lastDnd != -1) {
+            notificationManager.setInterruptionFilter(lastDnd)
         }
 
         val serviceIntent = Intent(context.applicationContext, ShutdownReceiverService::class.java)
