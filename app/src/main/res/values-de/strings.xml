@@ -20,9 +20,13 @@
     <string name="serviceChannelName">Dienstaktivität</string>
     <string name="serviceChannelDescription">Zeigt, dass Silent Boot aktiv ist.\nWird benötigt, damit Silent Boot korrekt funktioniert.</string>
 
+    <string name="helpHowSectionHeader">Wie es funktioniert</string>
+    <string name="helpHowSectionText">Silent Boot schaltet dein Gerät beim Herunterfahren stumm, um den Startsound zu unterdrücken, und stellt den ursprünglichen Modus wieder her, wenn du es wieder einschaltest.</string>
+
+    <string name="helpNotificationSectionHeader">Die Benachritigung</string>
+    <string name="helpNotificationSectionText">Silent Boot benötigt einen Dienst, der auf das Herunterfahren deines Geräts regieren kann. Da Android viele Einschränkungen hat was Apps dürfen, wenn man nicht direkt mit ihnen interagiert, muss dieser Dienst eine ständige Benachrichtigung anzeigen.</string>
+
     <string name="pref_category_basic">Grundeinstellungen</string>
     <string name="pref_category_help">Hilfe</string>
-    <string name="help_title_silentboot">Silent Boot</string>
-    <string name="help_text_silentboot">Silent Boot schaltet das Gerät beim Herunterfahren stumm, um den Startsound zu unterdrücken, und stellt den ursprünglichen Modus wieder her, nachdem das Gerät hochgefahren ist.\n</string>
 
 </resources>

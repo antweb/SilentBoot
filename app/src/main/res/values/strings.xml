@@ -20,9 +20,13 @@
     <string name="serviceChannelName">Service Activity</string>
     <string name="serviceChannelDescription">Indicates that Silent Boot is active.\nRequired for Silent Boot to work properly.</string>
 
+    <string name="helpHowSectionHeader">How it works</string>
+    <string name="helpHowSectionText">Silent Boot mutes your phone on shutdown to keep it quiet on boot and restores the previous ringer mode after startup is complete.</string>
+
+    <string name="helpNotificationSectionHeader">The notification</string>
+    <string name="helpNotificationSectionText">Silent Boot requires a service that can react to the event of your phone shutting down. Since Android is very restrictive about what apps can do while you are not directly interacting with them, this service must display a constant notification.</string>
+
     <string name="pref_category_basic">Basic</string>
     <string name="pref_category_help">Help</string>
-    <string name="help_title_silentboot">Silent Boot</string>
-    <string name="help_text_silentboot">Silent Boot mutes your phone on shutdown to keep it quiet on boot and restores the previous ringer mode after startup is complete.\n</string>
 
 </resources>
