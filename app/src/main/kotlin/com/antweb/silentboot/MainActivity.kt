@@ -36,6 +36,8 @@ class MainActivity : AppCompatActivity() {
             checkPermissions()
             startService()
         }
+
+        setSupportActionBar(binding.toolbar)
     }
 
     private fun setLabels() {

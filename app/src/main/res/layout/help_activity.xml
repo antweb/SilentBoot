@@ -1,29 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/sv_help_outer"
-    style="@style/help_outer" >
 
-    <LinearLayout
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        style="@style/Widget.MaterialComponents.Toolbar.Primary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:id="@+id/toolbar">
+    </com.google.android.material.appbar.MaterialToolbar>
 
-        <TextView
-            android:layout_width="wrap_content"
+    <ScrollView android:id="@+id/sv_help_outer"
+        style="@style/help_outer" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/helpHowSectionHeader" />
-        <TextView
-            style="@style/help_text"
-            android:text="@string/helpHowSectionText" />
+            android:orientation="vertical" >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/helpNotificationSectionHeader" />
-        <TextView
-            style="@style/help_text"
-            android:text="@string/helpNotificationSectionText" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/helpHowSectionHeader" />
+            <TextView
+                style="@style/help_text"
+                android:text="@string/helpHowSectionText" />
 
-    </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/helpNotificationSectionHeader" />
+            <TextView
+                style="@style/help_text"
+                android:text="@string/helpNotificationSectionText" />
 
-</ScrollView>
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>

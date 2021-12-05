@@ -1,6 +1,12 @@
 <resources>
 
-    <style name="AppTheme" parent="android:Theme" />
+    <style name="Theme.SilentBoot" parent="Theme.MaterialComponents.DayNight">
+        <item name="colorPrimary">#A80000</item>
+        <item name="colorPrimaryDark">#860000</item>
+        <item name="colorAccent">#A80000</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
 
     <style name="help_outer">
         <item name="android:layout_width">match_parent</item>
