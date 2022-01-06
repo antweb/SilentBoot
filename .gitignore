@@ -4,3 +4,5 @@
 /.idea
 /build
 .cache
+app/debug
+app/release
