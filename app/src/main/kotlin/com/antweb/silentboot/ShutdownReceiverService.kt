@@ -36,7 +36,7 @@ class ShutdownReceiverService : Service() {
         val notification = Notification.Builder(applicationContext, NOTIFICATION_CHANNEL_ID).apply {
             setContentText(getString(R.string.notificationEnabled))
             setSmallIcon(R.drawable.status_gingerbread)
-            setLargeIcon(BitmapFactory.decodeResource(resources, R.drawable.icon))
+            setLargeIcon(BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher))
         }.build()
 
         startForeground(NOTIFICATION_ID, notification)
