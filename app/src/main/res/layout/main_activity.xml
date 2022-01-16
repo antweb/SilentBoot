@@ -55,6 +55,8 @@
                 app:layout_constraintTop_toBottomOf="@id/enabledStatusText"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                app:strokeColor="?attr/colorPrimary"
                 android:text="@string/labelHelp">
             </Button>
 
