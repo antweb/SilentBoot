@@ -21,6 +21,11 @@ class ShutdownReceiver : BroadcastReceiver() {
         val notificationManager = context
             .getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
+        if (!notificationManager.isNotificationPolicyAccessGranted) {
+            // Should only happen if the permission is revoked manually
+            return
+        }
+
         val lastRingerMode = audioManager.ringerMode
         val lastDnd = notificationManager.currentInterruptionFilter
 

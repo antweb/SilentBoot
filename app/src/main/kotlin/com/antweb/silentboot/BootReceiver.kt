@@ -32,6 +32,11 @@ class BootReceiver : BroadcastReceiver() {
         val notificationManager = context
             .getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
+        if (!notificationManager.isNotificationPolicyAccessGranted) {
+            // Should only happen if the permission is revoked manually
+            return
+        }
+
         if (lastRingerMode != -1) {
             audioManager.ringerMode = lastRingerMode
         }
