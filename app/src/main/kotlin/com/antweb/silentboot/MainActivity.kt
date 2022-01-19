@@ -23,7 +23,8 @@ class MainActivity : AppCompatActivity() {
         isEnabled = sharedPrefs.getBoolean(PreferenceKey.ENABLED.key, false)
 
         setLabels()
-        binding.activateToggleButton.setOnClickListener {
+
+        binding.activateSwitch.setOnCheckedChangeListener { _, _ ->
             toggleEnabled()
         }
 
@@ -42,10 +43,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun setLabels() {
         if (isEnabled) {
-            binding.activateToggleButton.text = getString(R.string.buttonDisable)
+            binding.activateSwitch.isChecked = true
+            binding.statusImage.setImageDrawable(applicationContext.getDrawable(R.drawable.status_image_enabled))
             binding.enabledStatusText.text = getString(R.string.summaryEnabled)
         } else {
-            binding.activateToggleButton.text = getString(R.string.buttonEnable)
+            binding.activateSwitch.isChecked = false
+            binding.statusImage.setImageDrawable(applicationContext.getDrawable(R.drawable.status_image_disabled))
             binding.enabledStatusText.text = getString(R.string.summaryDisabled)
         }
     }

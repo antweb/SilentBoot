@@ -14,53 +14,53 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="24dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:id="@+id/statusImage"
+            android:src="@drawable/status_image_enabled"
+            android:layout_marginTop="56dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+        </ImageView>
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp"
+            android:id="@+id/activateSwitch"
+            app:layout_constraintTop_toBottomOf="@id/statusImage"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+        </com.google.android.material.switchmaterial.SwitchMaterial>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:id="@+id/enabledStatusText"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/activateSwitch"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+        </TextView>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/openHelpButton"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
-
-            <Button
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/activateToggleButton"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent">
-            </Button>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:id="@+id/enabledStatusText"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-                android:gravity="center"
-                app:layout_constraintTop_toBottomOf="@id/activateToggleButton"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent">
-            </TextView>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/openHelpButton"
-                android:layout_marginTop="24dp"
-                app:layout_constraintTop_toBottomOf="@id/enabledStatusText"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                app:strokeColor="?attr/colorPrimary"
-                android:text="@string/labelHelp">
-            </Button>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            app:strokeColor="?attr/colorPrimary"
+            android:text="@string/labelHelp">
+        </Button>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
