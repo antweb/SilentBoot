@@ -22,10 +22,10 @@ class MainActivity : AppCompatActivity() {
         val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(applicationContext)
         isEnabled = sharedPrefs.getBoolean(PreferenceKey.ENABLED.key, false)
 
-        setLabels()
-
-        binding.activateSwitch.setOnCheckedChangeListener { _, _ ->
-            toggleEnabled()
+        binding.activateSwitch.setOnCheckedChangeListener { _, value ->
+            if (value != isEnabled) {
+                updateEnabledState(value)
+            }
         }
 
         binding.openHelpButton.setOnClickListener {
@@ -33,12 +33,15 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        if (isEnabled) {
-            checkPermissions()
-            startService()
-        }
-
         setSupportActionBar(binding.toolbar)
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        setLabels()
+
+        updateEnabledState(isEnabled && checkPermissions())
     }
 
     private fun setLabels() {
@@ -53,18 +56,24 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun toggleEnabled() {
-        isEnabled = !isEnabled
+    private fun updateEnabledState(newValue: Boolean) {
+        if (newValue && !checkPermissions()) {
+            setLabels()
+            showPermissionDialog()
+            return
+        }
 
-        val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(applicationContext)
-        val editor = sharedPrefs.edit()
-        editor.putBoolean(PreferenceKey.ENABLED.key, isEnabled)
-        editor.apply()
+        if (newValue != isEnabled) {
+            isEnabled = newValue
+            setLabels()
 
-        setLabels()
+            val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(applicationContext)
+            val editor = sharedPrefs.edit()
+            editor.putBoolean(PreferenceKey.ENABLED.key, isEnabled)
+            editor.apply()
+        }
 
         if (isEnabled) {
-            checkPermissions()
             startService()
         } else {
             stopService()
@@ -81,18 +90,21 @@ class MainActivity : AppCompatActivity() {
         stopService(intent)
     }
 
-    private fun checkPermissions() {
+    private fun checkPermissions(): Boolean {
         val notificationManager = applicationContext.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+        return notificationManager.isNotificationPolicyAccessGranted
+    }
 
-        if (!notificationManager.isNotificationPolicyAccessGranted) {
-            val builder = AlertDialog.Builder(this)
-            builder.setMessage(getString(R.string.permissionDialogText))
-            builder.setPositiveButton(getString(R.string.permissionDialogEnable)) { _, _ ->
-                val intent = Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS)
-                startActivityForResult(intent, 0)
-            }
-            builder.setNegativeButton(getString(R.string.permissionDialogCancel)) { dialogInterface, i -> dialogInterface.dismiss() }
-            builder.show()
+    private fun showPermissionDialog() {
+        val builder = AlertDialog.Builder(this)
+        builder.setMessage(getString(R.string.permissionDialogText))
+        builder.setPositiveButton(getString(R.string.permissionDialogEnable)) { _, _ ->
+            val intent = Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS)
+            startActivityForResult(intent, 0)
         }
+        builder.setNegativeButton(getString(R.string.permissionDialogCancel)) { dialogInterface, _ ->
+            dialogInterface.dismiss()
+        }
+        builder.show()
     }
 }
