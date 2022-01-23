@@ -14,8 +14,8 @@ android {
         applicationId "com.antweb.silentboot"
         minSdk 28
         targetSdk 31
-        versionCode 20
-        versionName "2.3"
+        versionCode 25
+        versionName "3.0"
     }
 
     buildTypes {
