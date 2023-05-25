@@ -4,12 +4,12 @@ plugins {
 }
 
 android {
-    compileSdk = 31
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.antweb.silentboot"
         minSdk = 28
-        targetSdk = 31
+        targetSdk = 34
         versionCode = 25
         versionName = "3.0"
     }
@@ -37,8 +37,8 @@ android {
 }
 
 dependencies {
-    implementation("androidx.appcompat:appcompat:1.3.1")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.1")
-    implementation("androidx.preference:preference:1.1.1")
-    implementation("com.google.android.material:material:1.4.0")
+    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("androidx.preference:preference:1.2.0")
+    implementation("com.google.android.material:material:1.9.0")
 }
