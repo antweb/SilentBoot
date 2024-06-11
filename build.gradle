@@ -3,11 +3,13 @@ buildscript {
         mavenCentral()
         google()
     }
-
-    dependencies {
-        classpath 'com.android.tools.build:gradle:8.4.2'
-    }
 }
+
+plugins {
+    alias libs.plugins.android.application apply false
+    alias libs.plugins.org.jetbrains.kotlin.android apply false
+}
+
 
 allprojects {
     repositories {
