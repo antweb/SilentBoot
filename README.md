@@ -7,7 +7,7 @@ It mutes the phone on shutdown and restores the previous state after boot which 
 
 Silent Boot is available on [Google Play](https://play.google.com/store/apps/details?id=com.antweb.silentboot).
 
-Recent APKs can also be downloaded directly under (releases)[https://github.com/antweb/SilentBoot/releases]. 
+Recent APKs can also be downloaded directly under [releases](https://github.com/antweb/SilentBoot/releases). 
 
 An archive is available on [my website](https://www.anonweb.de/projects/silent-boot/).
 
