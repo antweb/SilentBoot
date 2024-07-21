@@ -6,6 +6,7 @@ import android.app.NotificationManager
 import android.app.Service
 import android.content.Intent
 import android.content.IntentFilter
+import android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE
 import android.graphics.BitmapFactory
 import android.os.IBinder
 
@@ -39,7 +40,7 @@ class ShutdownReceiverService : Service() {
             setLargeIcon(BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher))
         }.build()
 
-        startForeground(NOTIFICATION_ID, notification)
+        startForeground(NOTIFICATION_ID, notification, FOREGROUND_SERVICE_TYPE_SPECIAL_USE)
 
         return START_STICKY
     }

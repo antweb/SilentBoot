@@ -4,12 +4,12 @@ plugins {
 }
 
 android {
-    compileSdk = 31
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.antweb.silentboot"
-        minSdk = 28
-        targetSdk = 31
+        minSdk = 33
+        targetSdk = 34
         versionCode = 25
         versionName = "3.0"
     }

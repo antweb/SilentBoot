@@ -5,6 +5,8 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
 
     <supports-screens
         android:anyDensity="true"
@@ -50,7 +52,13 @@
             </intent-filter>
         </receiver>
 
-        <service android:name=".ShutdownReceiverService"/>
+        <service
+            android:name=".ShutdownReceiverService"
+            android:foregroundServiceType="specialUse">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="Required to process the system broadcast intent ACTION_SHUTDOWN. The main functionality of Silent Boot is to mute the device on shutdown through this intent." />
+        </service>
     </application>
 
 </manifest>
