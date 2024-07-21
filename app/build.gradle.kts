@@ -10,8 +10,8 @@ android {
         applicationId = "com.antweb.silentboot"
         minSdk = 33
         targetSdk = 34
-        versionCode = 25
-        versionName = "3.0"
+        versionCode = 26
+        versionName = "3.1"
     }
 
     buildTypes {
