@@ -21,7 +21,6 @@
         android:theme="@style/Theme.SilentBoot">
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name"
             android:multiprocess="false"
             android:exported="true">
             <intent-filter>

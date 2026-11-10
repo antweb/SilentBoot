@@ -71,14 +71,6 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-
-        val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(applicationContext)
-        val isEnabled = sharedPrefs.getBoolean(PreferenceKey.ENABLED.key, false)
-        updateEnabledState(isEnabled && checkPermissions())
-    }
-
     private fun updateEnabledState(isEnabled: Boolean) {
         if (isEnabled && !checkPermissions()) {
             showPermissionDialog()
