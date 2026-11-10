@@ -5,72 +5,90 @@ import android.app.NotificationManager
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
-import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.BackHandler
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.SizeTransform
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.togetherWith
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.core.content.edit
 import androidx.preference.PreferenceManager
-import com.antweb.silentboot.databinding.MainActivityBinding
 
-class MainActivity : AppCompatActivity() {
-    private lateinit var binding: MainActivityBinding
-    private var isEnabled = false
+class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = MainActivityBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        enableEdgeToEdge()
+        setContent {
+            SilentBootTheme {
+                var showHelp by remember { mutableStateOf(false) }
 
-        val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(applicationContext)
-        isEnabled = sharedPrefs.getBoolean(PreferenceKey.ENABLED.key, false)
+                // Ideally we'd want to use something like Navigation 3 here.
+                // But to keep the memory profile as small as possible, we'll instead create a
+                // rudimentary navigation with BackHandler + AnimatedContent that doesn't need extra
+                // dependencies.
+                BackHandler(enabled = showHelp) {
+                    showHelp = false
+                }
 
-        binding.activateSwitch.setOnCheckedChangeListener { _, value ->
-            if (value != isEnabled) {
-                updateEnabledState(value)
+                AnimatedContent(
+                    targetState = showHelp,
+                    label = "content",
+                    transitionSpec = {
+                        if (showHelp) {
+                            slideInHorizontally { width -> width } + fadeIn() togetherWith
+                                slideOutHorizontally { width -> -width } + fadeOut()
+                        } else {
+                            slideInHorizontally { width -> -width } + fadeIn() togetherWith
+                                slideOutHorizontally { width -> width } + fadeOut()
+                        }.using(
+                            SizeTransform(clip = false)
+                        )
+                    }
+                ) { state ->
+                    if (!state) {
+                        MainScreen(
+                            onHelpNavigate = { showHelp = true },
+                            onToggle = { enabled -> updateEnabledState(enabled) },
+                        )
+                    } else {
+                        HelpScreen(
+                            onBack = { showHelp = false },
+                        )
+                    }
+                }
             }
         }
-
-        binding.openHelpButton.setOnClickListener {
-            val intent = Intent(this, HelpActivity::class.java)
-            startActivity(intent)
-        }
-
-        setSupportActionBar(binding.toolbar)
     }
 
     override fun onResume() {
         super.onResume()
 
-        setLabels()
-
+        val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(applicationContext)
+        val isEnabled = sharedPrefs.getBoolean(PreferenceKey.ENABLED.key, false)
         updateEnabledState(isEnabled && checkPermissions())
     }
 
-    private fun setLabels() {
-        if (isEnabled) {
-            binding.activateSwitch.isChecked = true
-            binding.statusImage.setImageDrawable(applicationContext.getDrawable(R.drawable.status_image_enabled))
-            binding.enabledStatusText.text = getString(R.string.summaryEnabled)
-        } else {
-            binding.activateSwitch.isChecked = false
-            binding.statusImage.setImageDrawable(applicationContext.getDrawable(R.drawable.status_image_disabled))
-            binding.enabledStatusText.text = getString(R.string.summaryDisabled)
-        }
-    }
-
-    private fun updateEnabledState(newValue: Boolean) {
-        if (newValue && !checkPermissions()) {
-            setLabels()
+    private fun updateEnabledState(isEnabled: Boolean) {
+        if (isEnabled && !checkPermissions()) {
             showPermissionDialog()
             return
         }
 
-        if (newValue != isEnabled) {
-            isEnabled = newValue
-            setLabels()
-
-            val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(applicationContext)
-            val editor = sharedPrefs.edit()
-            editor.putBoolean(PreferenceKey.ENABLED.key, isEnabled)
-            editor.apply()
+        val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(applicationContext)
+        sharedPrefs.edit {
+            putBoolean(PreferenceKey.ENABLED.key, isEnabled)
+            apply()
         }
 
         if (isEnabled) {
