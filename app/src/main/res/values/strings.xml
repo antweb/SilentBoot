@@ -6,11 +6,14 @@
 
     <string name="buttonEnable">Enable</string>
     <string name="buttonDisable">Disable</string>
+    <string name="buttonBackContentDescription">Navigate back</string>
 
     <string name="labelEnable">Silent Boot</string>
     <string name="labelHelp">Help</string>
     <string name="summaryEnabled">Device will be muted on shutdown</string>
     <string name="summaryDisabled">Device will NOT be muted on shutdown</string>
+    <string name="stateDescriptionEnabled">Silent Boot enabled. Device will be muted on shutdown.</string>
+    <string name="stateDescriptionDisabled">Silent Boot disabled. Device will not be muted on shutdown.</string>
 
     <string name="permissionDialogText">Silent Boot requires additional permissions to mute and un-mute your phone.\n\nPlease enable Do Not Disturb access.</string>
     <string name="permissionDialogEnable">Enable</string>
