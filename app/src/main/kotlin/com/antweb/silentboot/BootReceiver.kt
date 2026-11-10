@@ -12,6 +12,10 @@ class BootReceiver : BroadcastReceiver() {
     private val restoreDelay = 5000
 
     override fun onReceive(context: Context, intent: Intent) {
+        if (intent.action != Intent.ACTION_BOOT_COMPLETED) {
+            return
+        }
+
         val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context)
         val isEnabled = sharedPrefs.getBoolean(PreferenceKey.ENABLED.key, false)
 

@@ -9,6 +9,10 @@ import androidx.preference.PreferenceManager
 
 class ShutdownReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
+        if (intent.action != Intent.ACTION_SHUTDOWN) {
+            return
+        }
+
         val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context)
         val isEnabled = sharedPrefs.getBoolean(PreferenceKey.ENABLED.key, true)
 
