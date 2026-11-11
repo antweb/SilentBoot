@@ -15,7 +15,8 @@
     <string name="stateDescriptionEnabled">Silent Boot enabled. Device will be muted on shutdown.</string>
     <string name="stateDescriptionDisabled">Silent Boot disabled. Device will not be muted on shutdown.</string>
 
-    <string name="permissionDialogText">Silent Boot requires additional permissions to mute and un-mute your phone.\n\nPlease enable Do Not Disturb access.</string>
+    <string name="permissionDialogTitle">Permissions required</string>
+    <string name="permissionDialogText">Silent Boot requires additional permissions to mute and unmute your phone.\n\nPlease enable \"Do Not Disturb\" / \"Modes\" access.</string>
     <string name="permissionDialogEnable">Enable</string>
     <string name="permissionDialogCancel">Cancel</string>
 

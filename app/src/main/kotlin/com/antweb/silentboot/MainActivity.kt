@@ -1,10 +1,7 @@
 package com.antweb.silentboot
 
-import android.app.AlertDialog
-import android.app.NotificationManager
 import android.content.Intent
 import android.os.Bundle
-import android.provider.Settings
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
@@ -72,11 +69,6 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun updateEnabledState(isEnabled: Boolean) {
-        if (isEnabled && !checkPermissions()) {
-            showPermissionDialog()
-            return
-        }
-
         val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(applicationContext)
         sharedPrefs.edit {
             putBoolean(PreferenceKey.ENABLED.key, isEnabled)
@@ -98,23 +90,5 @@ class MainActivity : ComponentActivity() {
     private fun stopService() {
         val intent = Intent(applicationContext, ShutdownReceiverService::class.java)
         stopService(intent)
-    }
-
-    private fun checkPermissions(): Boolean {
-        val notificationManager = applicationContext.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-        return notificationManager.isNotificationPolicyAccessGranted
-    }
-
-    private fun showPermissionDialog() {
-        val builder = AlertDialog.Builder(this)
-        builder.setMessage(getString(R.string.permissionDialogText))
-        builder.setPositiveButton(getString(R.string.permissionDialogEnable)) { _, _ ->
-            val intent = Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS)
-            startActivityForResult(intent, 0)
-        }
-        builder.setNegativeButton(getString(R.string.permissionDialogCancel)) { dialogInterface, _ ->
-            dialogInterface.dismiss()
-        }
-        builder.show()
     }
 }
