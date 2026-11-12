@@ -69,6 +69,15 @@ fun HelpScreen(onBack: () -> Unit) {
                     text = stringResource(R.string.helpNotificationSectionHeader),
                 )
                 Text(stringResource(R.string.helpNotificationSectionText))
+
+                Spacer(Modifier.height(24.dp))
+
+                Text(
+                    modifier = Modifier.semantics { heading() },
+                    style = MaterialTheme.typography.headlineSmall,
+                    text = stringResource(R.string.helpRestoreSectionHeader),
+                )
+                Text(stringResource(R.string.helpRestoreSectionText))
             }
         }
     }
