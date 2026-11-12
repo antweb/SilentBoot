@@ -20,15 +20,25 @@
     <string name="permissionDialogEnable">Enable</string>
     <string name="permissionDialogCancel">Cancel</string>
 
+    <string name="summaryRestore">Restoring previous settings…\n\nThis screen closes automatically</string>
+
     <string name="notificationEnabled">Silent Boot is active</string>
     <string name="serviceChannelName">Service Activity</string>
     <string name="serviceChannelDescription">Indicates that Silent Boot is active.\nRequired for Silent Boot to work properly.</string>
 
+    <string name="actionsChannelName">App Actions</string>
+    <string name="actionsChannelDescription">Shows app functionality that requires user interaction.</string>
+    <string name="notificationTitleRestore">Device restarted</string>
+    <string name="notificationTextRestore">Tap to restore your settings</string>
+
     <string name="helpHowSectionHeader">How it works</string>
-    <string name="helpHowSectionText">Silent Boot mutes your phone on shutdown to keep it quiet on boot and restores the previous ringer mode after startup is complete.</string>
+    <string name="helpHowSectionText">Silent Boot mutes your phone on shutdown to keep it quiet on boot and tries to restore the previous ringer mode after startup is complete.</string>
 
     <string name="helpNotificationSectionHeader">The notification</string>
     <string name="helpNotificationSectionText">Silent Boot requires a service that can react to the event of your phone shutting down. Since Android is very restrictive about what apps can do while you are not directly interacting with them, this service must display a constant notification.</string>
+
+    <string name="helpRestoreSectionHeader">Restoring on boot</string>
+    <string name="helpRestoreSectionText">Starting with Android 17, Silent Boot can no longer restore the previous settings automatically after a reboot. Instead, it will display a notification that you manually have to click to restore.</string>
 
     <string name="pref_category_basic">Basic</string>
     <string name="pref_category_help">Help</string>

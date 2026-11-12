@@ -11,11 +11,6 @@ import android.graphics.BitmapFactory
 import android.os.IBinder
 
 class ShutdownReceiverService : Service() {
-    companion object {
-        private const val NOTIFICATION_CHANNEL_ID = "SERVICE_CHANNEL"
-        private const val NOTIFICATION_ID = 1
-    }
-
     private var shutdownReceiver: ShutdownReceiver? = null
 
     override fun onBind(intent: Intent?): IBinder? {
@@ -27,20 +22,19 @@ class ShutdownReceiverService : Service() {
         val descriptionText = getString(R.string.serviceChannelDescription)
         val importance = NotificationManager.IMPORTANCE_MIN
 
-        val channel = NotificationChannel(NOTIFICATION_CHANNEL_ID, name, importance).apply {
+        val channel = NotificationChannel(NOTIFICATION_CHANNEL_ID_SERVICE, name, importance).apply {
             description = descriptionText
         }
-
         val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.createNotificationChannel(channel)
 
-        val notification = Notification.Builder(applicationContext, NOTIFICATION_CHANNEL_ID).apply {
+        val notification = Notification.Builder(applicationContext, NOTIFICATION_CHANNEL_ID_SERVICE).apply {
             setContentText(getString(R.string.notificationEnabled))
             setSmallIcon(R.drawable.notification_icon)
             setLargeIcon(BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher))
         }.build()
 
-        startForeground(NOTIFICATION_ID, notification, FOREGROUND_SERVICE_TYPE_SPECIAL_USE)
+        startForeground(NOTIFICATION_ID_SERVICE, notification, FOREGROUND_SERVICE_TYPE_SPECIAL_USE)
 
         return START_STICKY
     }
