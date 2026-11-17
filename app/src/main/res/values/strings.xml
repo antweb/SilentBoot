@@ -10,6 +10,7 @@
 
     <string name="labelEnable">Silent Boot</string>
     <string name="labelHelp">Help</string>
+    <string name="labelVersion">Version %s</string>
     <string name="summaryEnabled">Device will be muted on shutdown</string>
     <string name="summaryDisabled">Device will NOT be muted on shutdown</string>
     <string name="stateDescriptionEnabled">Silent Boot enabled. Device will be muted on shutdown.</string>

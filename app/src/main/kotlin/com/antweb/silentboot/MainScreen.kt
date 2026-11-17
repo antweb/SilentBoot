@@ -4,6 +4,7 @@ import android.app.NotificationManager
 import android.content.Context
 import android.content.Context.NOTIFICATION_SERVICE
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.provider.Settings
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
@@ -19,6 +20,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Switch
@@ -35,6 +37,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
@@ -94,7 +97,7 @@ fun MainScreen(onHelpNavigate: () -> Unit, onToggle: (enabled: Boolean) -> Unit)
             Column(
                 modifier =
                     Modifier
-                        .padding(horizontal = 16.dp, vertical = 32.dp)
+                        .padding(horizontal = 16.dp)
                         .fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
@@ -121,6 +124,8 @@ fun MainScreen(onHelpNavigate: () -> Unit, onToggle: (enabled: Boolean) -> Unit)
                 ) {
                     Text(stringResource(R.string.labelHelp))
                 }
+
+                VersionText(context, Modifier.padding(top = 8.dp))
             }
         }
     }
@@ -205,6 +210,27 @@ private fun PermissionDialog(onDismissRequest: () -> Unit, onConfirmation: () ->
             }
         },
     )
+}
+
+@Composable
+private fun VersionText(context: Context, modifier: Modifier = Modifier) {
+    val version = if (!LocalInspectionMode.current) {
+        // Throws UnsupportedOperationException in preview
+        context.packageManager.getPackageInfo(
+            context.packageName,
+            PackageManager.PackageInfoFlags.of(0),
+        ).versionName
+    } else {
+        "4.0"
+    }
+
+    if (version != null) {
+        Text(
+            modifier = modifier,
+            style = MaterialTheme.typography.bodySmall,
+            text = stringResource(R.string.labelVersion, version),
+        )
+    }
 }
 
 private fun checkPermission(context: Context): Boolean {

@@ -10,6 +10,7 @@
 
     <string name="labelEnable">Silent Boot</string>
     <string name="labelHelp">Hilfe</string>
+    <string name="labelVersion">Version %s</string>
     <string name="summaryEnabled">Das Gerät wird beim Herunterfahren stumm geschaltet</string>
     <string name="summaryDisabled">Das Gerät wird beim Herunterfahren NICHT stumm geschaltet</string>
     <string name="stateDescriptionEnabled">Silent Boot aktiviert. Das Gerät wird beim Herunterfahren stumm geschaltet.</string>
