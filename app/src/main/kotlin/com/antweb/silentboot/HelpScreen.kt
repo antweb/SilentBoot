@@ -39,7 +39,9 @@ fun HelpScreen(onBack: () -> Unit) {
                     IconButton(onClick = onBack) {
                         Icon(
                             painter = painterResource(R.drawable.outline_arrow_back_24),
-                            contentDescription = stringResource(R.string.buttonBackContentDescription),
+                            contentDescription = stringResource(
+                                R.string.buttonBackContentDescription,
+                            ),
                         )
                     }
                 },
@@ -48,16 +50,17 @@ fun HelpScreen(onBack: () -> Unit) {
         modifier = Modifier.fillMaxSize(),
     ) { innerPadding ->
         Column(
-            modifier = Modifier
-                .padding(innerPadding)
-                .fillMaxSize()
-                .verticalScroll(rememberScrollState())
+            modifier =
+                Modifier
+                    .padding(innerPadding)
+                    .fillMaxSize()
+                    .verticalScroll(rememberScrollState()),
         ) {
             Column(modifier = Modifier.padding(16.dp)) {
                 Text(
                     modifier = Modifier.semantics { heading() },
                     style = MaterialTheme.typography.headlineSmall,
-                    text = stringResource(R.string.helpHowSectionHeader)
+                    text = stringResource(R.string.helpHowSectionHeader),
                 )
                 Text(stringResource(R.string.helpHowSectionText))
 

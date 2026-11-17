@@ -21,7 +21,6 @@ import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 
 class MainActivity : ComponentActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -49,9 +48,9 @@ class MainActivity : ComponentActivity() {
                             slideInHorizontally { width -> -width } + fadeIn() togetherWith
                                 slideOutHorizontally { width -> width } + fadeOut()
                         }.using(
-                            SizeTransform(clip = false)
+                            SizeTransform(clip = false),
                         )
-                    }
+                    },
                 ) { state ->
                     if (!state) {
                         MainScreen(

@@ -51,10 +51,7 @@ import androidx.preference.PreferenceManager
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen(
-    onHelpNavigate: () -> Unit,
-    onToggle: (enabled: Boolean) -> Unit,
-) {
+fun MainScreen(onHelpNavigate: () -> Unit, onToggle: (enabled: Boolean) -> Unit) {
     // This would usually live in a view model
     // But to keep the app as small as possible, let's have this on a screen level for now
     val context = LocalContext.current
@@ -70,7 +67,7 @@ fun MainScreen(
             TopAppBar(title = {
                 Text(
                     modifier = Modifier.semantics { heading() },
-                    text = stringResource(R.string.app_name)
+                    text = stringResource(R.string.app_name),
                 )
             })
         },
@@ -84,19 +81,21 @@ fun MainScreen(
                     val intent = Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS)
                     context.startActivity(intent)
                 },
-                onDismissRequest = { showPermissionDialog = false }
+                onDismissRequest = { showPermissionDialog = false },
             )
         }
 
         Column(
-            modifier = Modifier
-                .padding(innerPadding)
-                .fillMaxSize()
+            modifier =
+                Modifier
+                    .padding(innerPadding)
+                    .fillMaxSize(),
         ) {
             Column(
-                modifier = Modifier
-                    .padding(horizontal = 16.dp, vertical = 32.dp)
-                    .fillMaxSize(),
+                modifier =
+                    Modifier
+                        .padding(horizontal = 16.dp, vertical = 32.dp)
+                        .fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 Spacer(Modifier.height(16.dp))
@@ -110,7 +109,7 @@ fun MainScreen(
                             isEnabled = newValue
                             onToggle(newValue)
                         }
-                    }
+                    },
                 )
 
                 Spacer(Modifier.weight(1f))
@@ -131,35 +130,37 @@ fun MainScreen(
 private fun EnableDisableSection(
     isEnabled: Boolean,
     onToggle: (enabled: Boolean) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
-    val stateDesc = if (isEnabled) {
-        stringResource(R.string.stateDescriptionEnabled)
-    } else {
-        stringResource(R.string.stateDescriptionDisabled)
-    }
+    val stateDesc =
+        if (isEnabled) {
+            stringResource(R.string.stateDescriptionEnabled)
+        } else {
+            stringResource(R.string.stateDescriptionDisabled)
+        }
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(16.dp))
-            .toggleable(
-                value = isEnabled,
-                onValueChange = { onToggle(it) }
-            )
-            .padding(16.dp)
-            .clearAndSetSemantics {
-                stateDescription = stateDesc
-                toggleableState = ToggleableState(isEnabled)
-                role = Role.Switch
-            },
+        modifier =
+            modifier
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(16.dp))
+                .toggleable(
+                    value = isEnabled,
+                    onValueChange = { onToggle(it) },
+                ).padding(16.dp)
+                .clearAndSetSemantics {
+                    stateDescription = stateDesc
+                    toggleableState = ToggleableState(isEnabled)
+                    role = Role.Switch
+                },
     ) {
-        val image = if (isEnabled) {
-            painterResource(R.drawable.status_image_enabled)
-        } else {
-            painterResource(R.drawable.status_image_disabled)
-        }
+        val image =
+            if (isEnabled) {
+                painterResource(R.drawable.status_image_enabled)
+            } else {
+                painterResource(R.drawable.status_image_disabled)
+            }
 
         Image(
             painter = image,
@@ -169,11 +170,12 @@ private fun EnableDisableSection(
 
         Spacer(Modifier.height(32.dp))
 
-        val summary = if (isEnabled) {
-            stringResource(R.string.summaryEnabled)
-        } else {
-            stringResource(R.string.summaryDisabled)
-        }
+        val summary =
+            if (isEnabled) {
+                stringResource(R.string.summaryEnabled)
+            } else {
+                stringResource(R.string.summaryDisabled)
+            }
 
         Switch(
             checked = isEnabled,
@@ -187,10 +189,7 @@ private fun EnableDisableSection(
 }
 
 @Composable
-private fun PermissionDialog(
-    onDismissRequest: () -> Unit,
-    onConfirmation: () -> Unit,
-) {
+private fun PermissionDialog(onDismissRequest: () -> Unit, onConfirmation: () -> Unit) {
     AlertDialog(
         title = { Text(stringResource(R.string.permissionDialogTitle)) },
         text = { Text(stringResource(R.string.permissionDialogText)) },
@@ -204,7 +203,7 @@ private fun PermissionDialog(
             TextButton(onClick = onDismissRequest) {
                 Text(stringResource(R.string.permissionDialogCancel))
             }
-        }
+        },
     )
 }
 
@@ -222,5 +221,4 @@ private fun MainScreenPreview() {
             onToggle = {},
         )
     }
-
 }

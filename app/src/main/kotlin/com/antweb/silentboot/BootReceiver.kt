@@ -40,33 +40,44 @@ class BootReceiver : BroadcastReceiver() {
     }
 
     private fun handleNew(context: Context) {
-        val notificationManager = context
-            .getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val notificationManager =
+            context
+                .getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-        val intent = Intent(context, RestoreActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        }
-        val pendingIntent = PendingIntent.getActivity(
-            context, 0, intent,
-            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-        )
+        val intent =
+            Intent(context, RestoreActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            }
+        val pendingIntent =
+            PendingIntent.getActivity(
+                context,
+                0,
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
+            )
 
-        val channel = NotificationChannel(
-            NOTIFICATION_CHANNEL_ID_ACTIONS,
-            context.getString(R.string.actionsChannelName),
-            NotificationManager.IMPORTANCE_LOW,
-        ).apply {
-            description = context.getString(R.string.actionsChannelDescription)
-        }
+        val channel =
+            NotificationChannel(
+                NOTIFICATION_CHANNEL_ID_ACTIONS,
+                context.getString(R.string.actionsChannelName),
+                NotificationManager.IMPORTANCE_LOW,
+            ).apply {
+                description = context.getString(R.string.actionsChannelDescription)
+            }
         notificationManager.createNotificationChannel(channel)
 
-        val notification = Notification.Builder(context, NOTIFICATION_CHANNEL_ID_ACTIONS).apply {
-            setContentTitle(context.getString(R.string.notificationTitleRestore))
-            setContentText(context.getString(R.string.notificationTextRestore))
-            setSmallIcon(R.drawable.notification_icon)
-            setLargeIcon(BitmapFactory.decodeResource(context.resources, R.mipmap.ic_launcher))
-            setContentIntent(pendingIntent)
-        }.build()
+        val notification =
+            Notification
+                .Builder(context, NOTIFICATION_CHANNEL_ID_ACTIONS)
+                .apply {
+                    setContentTitle(context.getString(R.string.notificationTitleRestore))
+                    setContentText(context.getString(R.string.notificationTextRestore))
+                    setSmallIcon(R.drawable.notification_icon)
+                    setLargeIcon(
+                        BitmapFactory.decodeResource(context.resources, R.mipmap.ic_launcher),
+                    )
+                    setContentIntent(pendingIntent)
+                }.build()
 
         notificationManager.notify(NOTIFICATION_ID_RESTORE, notification)
     }

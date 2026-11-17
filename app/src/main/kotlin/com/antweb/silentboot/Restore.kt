@@ -19,7 +19,10 @@ fun restoreSavedSettings(context: Context) {
     val audioManager = context.getSystemService(AUDIO_SERVICE) as AudioManager
     val notificationManager = context.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
 
-    Log.i(TAG, "Restoring. lastRingerMode: $lastRingerMode - lastDnd: $lastDnd - isVolumeFixed: ${audioManager.isVolumeFixed}")
+    Log.i(
+        TAG,
+        "Restoring. lastRingerMode: $lastRingerMode - lastDnd: $lastDnd - isVolumeFixed: ${audioManager.isVolumeFixed}",
+    )
 
     if (!notificationManager.isNotificationPolicyAccessGranted) {
         // Should only happen if the permission is revoked manually
@@ -35,5 +38,9 @@ fun restoreSavedSettings(context: Context) {
         audioManager.ringerMode = lastRingerMode
     }
 
-    Log.i(TAG, "Restore complete. ringerMode: ${audioManager.ringerMode} - currentInterruptionFilter: ${notificationManager.currentInterruptionFilter}")
+    Log
+        .i(
+            TAG,
+            "Restore complete. ringerMode: ${audioManager.ringerMode} - currentInterruptionFilter: ${notificationManager.currentInterruptionFilter}",
+        )
 }

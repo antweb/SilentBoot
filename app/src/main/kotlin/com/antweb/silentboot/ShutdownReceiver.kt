@@ -20,10 +20,12 @@ class ShutdownReceiver : BroadcastReceiver() {
             return
         }
 
-        val audioManager = context
-            .getSystemService(Context.AUDIO_SERVICE) as AudioManager
-        val notificationManager = context
-            .getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val audioManager =
+            context
+                .getSystemService(Context.AUDIO_SERVICE) as AudioManager
+        val notificationManager =
+            context
+                .getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         if (!notificationManager.isNotificationPolicyAccessGranted) {
             // Should only happen if the permission is revoked manually

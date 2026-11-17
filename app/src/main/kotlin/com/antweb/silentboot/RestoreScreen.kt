@@ -26,20 +26,21 @@ fun RestoreScreen() {
                 TopAppBar(title = {
                     Text(
                         modifier = Modifier.semantics { heading() },
-                        text = stringResource(R.string.app_name)
+                        text = stringResource(R.string.app_name),
                     )
                 })
             },
             modifier = Modifier.fillMaxSize(),
         ) { innerPadding ->
             Column(
-                modifier = Modifier
-                    .padding(innerPadding)
-                    .fillMaxSize(),
+                modifier =
+                    Modifier
+                        .padding(innerPadding)
+                        .fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center,
             ) {
-                Text(textAlign = TextAlign.Center ,text = stringResource(R.string.summaryRestore))
+                Text(textAlign = TextAlign.Center, text = stringResource(R.string.summaryRestore))
             }
         }
     }
