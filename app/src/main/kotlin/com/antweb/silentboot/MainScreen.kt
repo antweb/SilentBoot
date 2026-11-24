@@ -1,12 +1,16 @@
 package com.antweb.silentboot
 
+import android.Manifest
 import android.app.NotificationManager
 import android.content.Context
 import android.content.Context.NOTIFICATION_SERVICE
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.provider.Settings
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.defaultMinSize
@@ -20,9 +24,12 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SegmentedListItem
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -65,6 +72,23 @@ fun MainScreen(onHelpNavigate: () -> Unit, onToggle: (enabled: Boolean) -> Unit)
 
     var showPermissionDialog by rememberSaveable { mutableStateOf(false) }
 
+    var hasNotificationPermission by remember {
+        mutableStateOf(
+            context.checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) ==
+                PackageManager.PERMISSION_GRANTED,
+        )
+    }
+
+    var hasNotificationPolicyPermission by remember {
+        mutableStateOf(checkNotificationPolicyPermission(context))
+    }
+
+    val permissionLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.RequestPermission(),
+    ) { isGranted ->
+        hasNotificationPermission = isGranted
+    }
+
     Scaffold(
         topBar = {
             TopAppBar(title = {
@@ -106,13 +130,21 @@ fun MainScreen(onHelpNavigate: () -> Unit, onToggle: (enabled: Boolean) -> Unit)
                 EnableDisableSection(
                     isEnabled = isEnabled,
                     onToggle = { newValue ->
-                        if (!checkPermission(context)) {
-                            showPermissionDialog = true
-                        } else {
-                            isEnabled = newValue
-                            onToggle(newValue)
-                        }
+                        isEnabled = newValue
+                        onToggle(newValue)
                     },
+                )
+
+                Spacer(Modifier.height(24.dp))
+
+                PermissionInfo(
+                    hasNotificationPermission = hasNotificationPermission,
+                    onNotificationPermissionClick = {
+                        permissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                    },
+                    hasNotificationPolicyPermission = hasNotificationPolicyPermission,
+                    onNotificationPolicyPermissionClick = { showPermissionDialog = true },
+                    modifier = Modifier.fillMaxWidth(),
                 )
 
                 Spacer(Modifier.weight(1f))
@@ -153,7 +185,8 @@ private fun EnableDisableSection(
                 .toggleable(
                     value = isEnabled,
                     onValueChange = { onToggle(it) },
-                ).padding(16.dp)
+                )
+                .padding(16.dp)
                 .clearAndSetSemantics {
                     stateDescription = stateDesc
                     toggleableState = ToggleableState(isEnabled)
@@ -213,6 +246,80 @@ private fun PermissionDialog(onDismissRequest: () -> Unit, onConfirmation: () ->
 }
 
 @Composable
+private fun PermissionInfo(
+    hasNotificationPermission: Boolean,
+    onNotificationPermissionClick: () -> Unit,
+    hasNotificationPolicyPermission: Boolean,
+    onNotificationPolicyPermissionClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Column(
+        modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(ListItemDefaults.SegmentedGap),
+    ) {
+        val count = 2
+
+        PermissionListItem(
+            hasPermission = hasNotificationPermission,
+            onClick = onNotificationPermissionClick,
+            content = { Text(stringResource(R.string.notificationPermissionLabel)) },
+            count = count,
+            index = 0,
+        )
+
+        PermissionListItem(
+            hasPermission = hasNotificationPolicyPermission,
+            onClick = onNotificationPolicyPermissionClick,
+            content = { Text(stringResource(R.string.modesPermissionLabel)) },
+            count = count,
+            index = 1,
+        )
+    }
+}
+
+@Composable
+private fun PermissionListItem(
+    hasPermission: Boolean,
+    onClick: () -> Unit,
+    content: @Composable () -> Unit,
+    count: Int,
+    index: Int,
+    modifier: Modifier = Modifier,
+) {
+    val colors =
+        ListItemDefaults.colors(containerColor = MaterialTheme.colorScheme.surfaceContainer)
+
+    SegmentedListItem(
+        onClick = {
+            if (!hasPermission) {
+                onClick()
+            }
+        },
+        shapes = ListItemDefaults.segmentedShapes(index, count),
+        colors = colors,
+        content = content,
+        supportingContent = {
+            if (hasPermission) {
+                Text(stringResource(R.string.permissionGrantedLabel))
+            } else {
+                Text(stringResource(R.string.permissionNotGrantedLabel))
+            }
+        },
+        trailingContent = {
+            if (!hasPermission) {
+                Icon(
+                    painter = painterResource(R.drawable.baseline_error_24),
+                    contentDescription = stringResource(
+                        R.string.permissionRequiresAttentionContentDescription,
+                    ),
+                )
+            }
+        },
+        modifier = modifier,
+    )
+}
+
+@Composable
 private fun VersionText(context: Context, modifier: Modifier = Modifier) {
     val version = if (!LocalInspectionMode.current) {
         // Throws UnsupportedOperationException in preview
@@ -233,7 +340,7 @@ private fun VersionText(context: Context, modifier: Modifier = Modifier) {
     }
 }
 
-private fun checkPermission(context: Context): Boolean {
+private fun checkNotificationPolicyPermission(context: Context): Boolean {
     val notificationManager = context.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
     return notificationManager.isNotificationPolicyAccessGranted
 }

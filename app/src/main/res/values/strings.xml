@@ -15,6 +15,11 @@
     <string name="summaryDisabled">Device will NOT be muted on shutdown</string>
     <string name="stateDescriptionEnabled">Silent Boot enabled. Device will be muted on shutdown.</string>
     <string name="stateDescriptionDisabled">Silent Boot disabled. Device will not be muted on shutdown.</string>
+    <string name="notificationPermissionLabel">Notifications</string>
+    <string name="modesPermissionLabel">Modes access</string>
+    <string name="permissionGrantedLabel">Allowed</string>
+    <string name="permissionNotGrantedLabel">Not allowed</string>
+    <string name="permissionRequiresAttentionContentDescription">Requires attention.</string>
 
     <string name="permissionDialogTitle">Permissions required</string>
     <string name="permissionDialogText">Silent Boot requires additional permissions to mute and unmute your phone.\n\nPlease enable \"Do Not Disturb\" / \"Modes\" access.</string>
