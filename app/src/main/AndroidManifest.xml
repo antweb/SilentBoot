@@ -44,14 +44,6 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-        <receiver
-            android:name=".ShutdownReceiver"
-            android:enabled="true"
-            android:exported="true">
-            <intent-filter android:priority="9999">
-                <action android:name="android.intent.action.ACTION_SHUTDOWN" />
-            </intent-filter>
-        </receiver>
 
         <service
             android:name=".ShutdownReceiverService"
