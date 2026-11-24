@@ -13,9 +13,8 @@ android {
     defaultConfig {
         applicationId = "com.antweb.silentboot"
         minSdk = 33
-        targetSdk = 37
-        versionCode = 26
-        versionName = "3.1"
+        versionCode = 27
+        versionName = "4.0"
     }
 
     buildTypes {
