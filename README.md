@@ -1,6 +1,6 @@
 # Silent Boot
 
-A simple Android app that suppresses annoying startup sounds your phone.
+A simple Android app that suppresses annoying startup sounds on your phone.
 It mutes the phone on shutdown and restores the previous state after boot which prevents any chimes from being played.
 
 ## Releases

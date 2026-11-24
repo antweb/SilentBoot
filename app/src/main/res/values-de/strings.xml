@@ -11,24 +11,24 @@
     <string name="labelEnable">Silent Boot</string>
     <string name="labelHelp">Hilfe</string>
     <string name="labelVersion">Version %s</string>
-    <string name="summaryEnabled">Das Gerät wird beim Herunterfahren stumm geschaltet</string>
-    <string name="summaryDisabled">Das Gerät wird beim Herunterfahren NICHT stumm geschaltet</string>
-    <string name="stateDescriptionEnabled">Silent Boot aktiviert. Das Gerät wird beim Herunterfahren stumm geschaltet.</string>
-    <string name="stateDescriptionDisabled">Silent Boot deaktiviert. Das Gerät wird beim Herunterfahren NICHT stumm geschaltet.</string>
+    <string name="summaryEnabled">Das Gerät wird beim Herunterfahren stummgeschaltet</string>
+    <string name="summaryDisabled">Das Gerät wird beim Herunterfahren NICHT stummgeschaltet</string>
+    <string name="stateDescriptionEnabled">Silent Boot aktiviert. Das Gerät wird beim Herunterfahren stummgeschaltet.</string>
+    <string name="stateDescriptionDisabled">Silent Boot deaktiviert. Das Gerät wird beim Herunterfahren NICHT stummgeschaltet.</string>
     <string name="notificationPermissionLabel">Benachrichtigungen</string>
-    <string name="modesPermissionLabel">Modi</string>
+    <string name="modesPermissionLabel">Zugriff auf Modi</string>
     <string name="permissionGrantedLabel">Erlaubt</string>
     <string name="permissionNotGrantedLabel">Nicht erlaubt</string>
     <string name="permissionRequiresAttentionContentDescription">Sollte angepasst werden.</string>
 
     <string name="permissionDialogTitle">Fehlende Berechtigungen</string>
-    <string name="permissionDialogText">Silent Boot benötigt zusätzliche Berechtigungen, um das Gerät stumm zu schalten.\n\nBitte aktiviere den Zugriff auf \"Nicht stören\" / \"Modi\".</string>
-    <string name="permissionDialogEnable">Aktiveren</string>
+    <string name="permissionDialogText">Silent Boot benötigt zusätzliche Berechtigungen, um das Gerät stummzuschalten.\n\nBitte aktiviere den Zugriff auf \"Nicht stören\" / \"Modi\".</string>
+    <string name="permissionDialogEnable">Aktivieren</string>
     <string name="permissionDialogCancel">Abbrechen</string>
 
     <string name="summaryRestore">Vorherige Einstellungen werden wiederhergestellt…\n\nDieser Bildschirm schließt automatisch</string>
 
-    <string name="notificationEnabled">Silent Boot is aktiv</string>
+    <string name="notificationEnabled">Silent Boot ist aktiv</string>
     <string name="serviceChannelName">Dienstaktivität</string>
     <string name="serviceChannelDescription">Zeigt, dass Silent Boot aktiv ist.\nWird benötigt, damit Silent Boot korrekt funktioniert.</string>
 
@@ -40,11 +40,11 @@
     <string name="helpHowSectionHeader">Wie es funktioniert</string>
     <string name="helpHowSectionText">Silent Boot schaltet dein Gerät beim Herunterfahren stumm, um den Startsound zu unterdrücken, und stellt den ursprünglichen Modus wieder her, wenn du es wieder einschaltest.</string>
 
-    <string name="helpNotificationSectionHeader">Die Benachritigung</string>
-    <string name="helpNotificationSectionText">Silent Boot benötigt einen Dienst, der auf das Herunterfahren deines Geräts regieren kann. Da Android viele Einschränkungen hat was Apps dürfen, wenn man nicht direkt mit ihnen interagiert, muss dieser Dienst eine ständige Benachrichtigung anzeigen.</string>
+    <string name="helpNotificationSectionHeader">Die Benachrichtigung</string>
+    <string name="helpNotificationSectionText">Silent Boot benötigt einen Dienst, der auf das Herunterfahren deines Geräts reagieren kann. Da Android viele Einschränkungen hat, was Apps dürfen, wenn man nicht direkt mit ihnen interagiert, muss dieser Dienst eine ständige Benachrichtigung anzeigen.</string>
 
     <string name="helpRestoreSectionHeader">Automatisches Wiederherstellen</string>
-    <string name="helpRestoreSectionText">Auf Android 17 und neuer kann Silent Boot die ursprünglichen Einstellungen nicht mehr automatisch wiederherstellen. Stattdessen wird nach dem Neustart eine Benachrichtung eingeblendet, die angeklickt werden muss, um die Einstellungen wiederherzustellen.</string>
+    <string name="helpRestoreSectionText">Ab Android 17 kann Silent Boot die ursprünglichen Einstellungen nicht mehr automatisch wiederherstellen. Stattdessen wird nach dem Neustart eine Benachrichtigung eingeblendet, die angeklickt werden muss, um die Einstellungen wiederherzustellen.</string>
 
     <string name="pref_category_basic">Grundeinstellungen</string>
     <string name="pref_category_help">Hilfe</string>

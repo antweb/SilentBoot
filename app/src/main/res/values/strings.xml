@@ -44,7 +44,7 @@
     <string name="helpNotificationSectionText">Silent Boot requires a service that can react to the event of your phone shutting down. Since Android is very restrictive about what apps can do while you are not directly interacting with them, this service must display a constant notification.</string>
 
     <string name="helpRestoreSectionHeader">Restoring on boot</string>
-    <string name="helpRestoreSectionText">Starting with Android 17, Silent Boot can no longer restore the previous settings automatically after a reboot. Instead, it will display a notification that you manually have to click to restore.</string>
+    <string name="helpRestoreSectionText">Starting with Android 17, Silent Boot can no longer restore the previous settings automatically after a reboot. Instead, it will display a notification that you have to tap manually to restore your settings.</string>
 
     <string name="pref_category_basic">Basic</string>
     <string name="pref_category_help">Help</string>

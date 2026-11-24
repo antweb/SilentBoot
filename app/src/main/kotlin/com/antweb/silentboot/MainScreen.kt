@@ -49,6 +49,7 @@ import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.semantics.toggleableState
 import androidx.compose.ui.state.ToggleableState
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.preference.PreferenceManager
@@ -69,8 +70,13 @@ fun MainScreen(onHelpNavigate: () -> Unit, onToggle: (enabled: Boolean) -> Unit)
         mutableStateOf(checkNotificationPermission(context))
     }
 
+    val isPreview = LocalInspectionMode.current
     var hasModesPermission by remember {
-        mutableStateOf(checkModesPermission(context))
+        if (isPreview) {
+            mutableStateOf(false)
+        } else {
+            mutableStateOf(checkModesPermission(context))
+        }
     }
 
     val permissionLauncher = rememberLauncherForActivityResult(
@@ -206,7 +212,7 @@ private fun EnableDisableSection(
 
         Spacer(Modifier.height(16.dp))
 
-        Text(summary)
+        Text(textAlign = TextAlign.Center, text = summary)
     }
 }
 
