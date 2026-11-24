@@ -52,6 +52,8 @@ import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.LifecycleEventEffect
 import androidx.preference.PreferenceManager
 
 @Composable
@@ -86,6 +88,15 @@ fun MainScreen(onHelpNavigate: () -> Unit, onToggle: (enabled: Boolean) -> Unit)
     }
 
     val settingsLauncher = rememberLauncherForActivityResult(OpenSettingsResultContract()) {
+        hasModesPermission = checkModesPermission(context)
+    }
+
+    LifecycleEventEffect(Lifecycle.Event.ON_RESUME) {
+        if (isPreview) {
+            return@LifecycleEventEffect
+        }
+
+        hasNotificationPermission = checkNotificationPermission(context)
         hasModesPermission = checkModesPermission(context)
     }
 
