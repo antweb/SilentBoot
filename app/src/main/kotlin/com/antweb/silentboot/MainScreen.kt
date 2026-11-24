@@ -67,6 +67,7 @@ fun MainScreen(onHelpNavigate: () -> Unit, onToggle: (enabled: Boolean) -> Unit)
     }
 
     var showPermissionDialog by rememberSaveable { mutableStateOf(false) }
+    var showPermissionWarningDialog by rememberSaveable { mutableStateOf(false) }
 
     var hasNotificationPermission by remember {
         mutableStateOf(checkNotificationPermission(context))
@@ -104,12 +105,16 @@ fun MainScreen(onHelpNavigate: () -> Unit, onToggle: (enabled: Boolean) -> Unit)
         modifier = Modifier.fillMaxSize(),
     ) { innerPadding ->
         if (showPermissionDialog) {
-            PermissionDialog(
+            ModesPermissionDialog(
                 onConfirmation = {
                     showPermissionDialog = false
                     settingsLauncher.launch(Unit)
                 },
                 onDismissRequest = { showPermissionDialog = false },
+            )
+        } else if (showPermissionWarningDialog) {
+            PermissionWarningDialog(
+                onDismissRequest = { showPermissionWarningDialog = false },
             )
         }
 
@@ -128,9 +133,14 @@ fun MainScreen(onHelpNavigate: () -> Unit, onToggle: (enabled: Boolean) -> Unit)
             ) {
                 Spacer(Modifier.height(48.dp))
 
+                val hasAllPermissions = hasNotificationPermission && hasModesPermission
                 EnableDisableSection(
                     isEnabled = isEnabled,
+                    hasAllPermissions = hasAllPermissions,
                     onToggle = { newValue ->
+                        if (newValue && !hasAllPermissions) {
+                            showPermissionWarningDialog = true
+                        }
                         isEnabled = newValue
                         onToggle(newValue)
                     },
@@ -167,11 +177,14 @@ fun MainScreen(onHelpNavigate: () -> Unit, onToggle: (enabled: Boolean) -> Unit)
 @Composable
 private fun EnableDisableSection(
     isEnabled: Boolean,
+    hasAllPermissions: Boolean,
     onToggle: (enabled: Boolean) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val stateDesc =
-        if (isEnabled) {
+        if (isEnabled && !hasAllPermissions) {
+            stringResource(R.string.stateDescriptionMissingPermissions)
+        } else if (isEnabled) {
             stringResource(R.string.stateDescriptionEnabled)
         } else {
             stringResource(R.string.stateDescriptionDisabled)
@@ -210,7 +223,9 @@ private fun EnableDisableSection(
         Spacer(Modifier.height(32.dp))
 
         val summary =
-            if (isEnabled) {
+            if (isEnabled && !hasAllPermissions) {
+                stringResource(R.string.summaryMissingPermissions)
+            } else if (isEnabled) {
                 stringResource(R.string.summaryEnabled)
             } else {
                 stringResource(R.string.summaryDisabled)
@@ -228,7 +243,7 @@ private fun EnableDisableSection(
 }
 
 @Composable
-private fun PermissionDialog(onDismissRequest: () -> Unit, onConfirmation: () -> Unit) {
+private fun ModesPermissionDialog(onDismissRequest: () -> Unit, onConfirmation: () -> Unit) {
     AlertDialog(
         title = { Text(stringResource(R.string.permissionDialogTitle)) },
         text = { Text(stringResource(R.string.permissionDialogText)) },
@@ -241,6 +256,20 @@ private fun PermissionDialog(onDismissRequest: () -> Unit, onConfirmation: () ->
         dismissButton = {
             TextButton(onClick = onDismissRequest) {
                 Text(stringResource(R.string.permissionDialogCancel))
+            }
+        },
+    )
+}
+
+@Composable
+private fun PermissionWarningDialog(onDismissRequest: () -> Unit) {
+    AlertDialog(
+        title = { Text(stringResource(R.string.permissionWarningDialogTitle)) },
+        text = { Text(stringResource(R.string.permissionWarningDialogText)) },
+        onDismissRequest = onDismissRequest,
+        confirmButton = {
+            TextButton(onClick = onDismissRequest) {
+                Text(stringResource(R.string.permissionDialogConfirm))
             }
         },
     )

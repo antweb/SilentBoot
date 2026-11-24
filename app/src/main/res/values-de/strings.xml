@@ -13,8 +13,10 @@
     <string name="labelVersion">Version %s</string>
     <string name="summaryEnabled">Das Gerät wird beim Herunterfahren stummgeschaltet</string>
     <string name="summaryDisabled">Das Gerät wird beim Herunterfahren NICHT stummgeschaltet</string>
+    <string name="summaryMissingPermissions">Es fehlen Berechtigungen und das Gerät wird eventuell NICHT stummgeschaltet</string>
     <string name="stateDescriptionEnabled">Silent Boot aktiviert. Das Gerät wird beim Herunterfahren stummgeschaltet.</string>
     <string name="stateDescriptionDisabled">Silent Boot deaktiviert. Das Gerät wird beim Herunterfahren NICHT stummgeschaltet.</string>
+    <string name="stateDescriptionMissingPermissions">Silent Boot ist aktiviert aber es fehlen Berechtigungen. Das Gerät wird eventuell beim Herunterfahren NICHT stummgeschaltet.</string>
     <string name="notificationPermissionLabel">Benachrichtigungen</string>
     <string name="modesPermissionLabel">Zugriff auf Modi</string>
     <string name="permissionGrantedLabel">Erlaubt</string>
@@ -25,6 +27,10 @@
     <string name="permissionDialogText">Silent Boot benötigt zusätzliche Berechtigungen, um das Gerät stummzuschalten.\n\nBitte aktiviere den Zugriff auf \"Nicht stören\" / \"Modi\".</string>
     <string name="permissionDialogEnable">Aktivieren</string>
     <string name="permissionDialogCancel">Abbrechen</string>
+
+    <string name="permissionWarningDialogTitle">Fehlende Berechtigungen</string>
+    <string name="permissionWarningDialogText">Silent Boot benötigt zusätzliche Berechtigungen um zu funktionieren. Tippe auf die Liste von Berechtigungen, um diese zu erlauben.</string>
+    <string name="permissionDialogConfirm">OK</string>
 
     <string name="summaryRestore">Vorherige Einstellungen werden wiederhergestellt…\n\nDieser Bildschirm schließt automatisch</string>
 
