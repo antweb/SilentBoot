@@ -66,10 +66,7 @@ fun MainScreen(onHelpNavigate: () -> Unit, onToggle: (enabled: Boolean) -> Unit)
     var showPermissionDialog by rememberSaveable { mutableStateOf(false) }
 
     var hasNotificationPermission by remember {
-        mutableStateOf(
-            context.checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) ==
-                PackageManager.PERMISSION_GRANTED,
-        )
+        mutableStateOf(checkNotificationPermission(context))
     }
 
     var hasNotificationPolicyPermission by remember {
@@ -326,6 +323,10 @@ private fun VersionText(context: Context, modifier: Modifier = Modifier) {
         )
     }
 }
+
+private fun checkNotificationPermission(context: Context): Boolean =
+    context.checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) ==
+        PackageManager.PERMISSION_GRANTED
 
 private fun checkNotificationPolicyPermission(context: Context): Boolean {
     val notificationManager = context.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
