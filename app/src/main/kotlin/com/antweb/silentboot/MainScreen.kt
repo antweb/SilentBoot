@@ -4,9 +4,7 @@ import android.Manifest
 import android.app.NotificationManager
 import android.content.Context
 import android.content.Context.NOTIFICATION_SERVICE
-import android.content.Intent
 import android.content.pm.PackageManager
-import android.provider.Settings
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
@@ -84,6 +82,10 @@ fun MainScreen(onHelpNavigate: () -> Unit, onToggle: (enabled: Boolean) -> Unit)
         hasNotificationPermission = isGranted
     }
 
+    val settingsLauncher = rememberLauncherForActivityResult(OpenSettingsResultContract()) {
+        hasNotificationPolicyPermission = checkNotificationPolicyPermission(context)
+    }
+
     Scaffold(
         modifier = Modifier.fillMaxSize(),
     ) { innerPadding ->
@@ -91,9 +93,7 @@ fun MainScreen(onHelpNavigate: () -> Unit, onToggle: (enabled: Boolean) -> Unit)
             PermissionDialog(
                 onConfirmation = {
                     showPermissionDialog = false
-
-                    val intent = Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS)
-                    context.startActivity(intent)
+                    settingsLauncher.launch(Unit)
                 },
                 onDismissRequest = { showPermissionDialog = false },
             )
