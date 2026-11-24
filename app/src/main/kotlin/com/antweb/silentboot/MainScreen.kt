@@ -69,8 +69,8 @@ fun MainScreen(onHelpNavigate: () -> Unit, onToggle: (enabled: Boolean) -> Unit)
         mutableStateOf(checkNotificationPermission(context))
     }
 
-    var hasNotificationPolicyPermission by remember {
-        mutableStateOf(checkNotificationPolicyPermission(context))
+    var hasModesPermission by remember {
+        mutableStateOf(checkModesPermission(context))
     }
 
     val permissionLauncher = rememberLauncherForActivityResult(
@@ -80,7 +80,7 @@ fun MainScreen(onHelpNavigate: () -> Unit, onToggle: (enabled: Boolean) -> Unit)
     }
 
     val settingsLauncher = rememberLauncherForActivityResult(OpenSettingsResultContract()) {
-        hasNotificationPolicyPermission = checkNotificationPolicyPermission(context)
+        hasModesPermission = checkModesPermission(context)
     }
 
     Scaffold(
@@ -126,8 +126,8 @@ fun MainScreen(onHelpNavigate: () -> Unit, onToggle: (enabled: Boolean) -> Unit)
                     onNotificationPermissionClick = {
                         permissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
                     },
-                    hasNotificationPolicyPermission = hasNotificationPolicyPermission,
-                    onNotificationPolicyPermissionClick = { showPermissionDialog = true },
+                    hasModesPermission = hasModesPermission,
+                    onModesPermissionClick = { showPermissionDialog = true },
                     modifier = Modifier.fillMaxWidth(),
                 )
 
@@ -233,8 +233,8 @@ private fun PermissionDialog(onDismissRequest: () -> Unit, onConfirmation: () ->
 private fun PermissionInfo(
     hasNotificationPermission: Boolean,
     onNotificationPermissionClick: () -> Unit,
-    hasNotificationPolicyPermission: Boolean,
-    onNotificationPolicyPermissionClick: () -> Unit,
+    hasModesPermission: Boolean,
+    onModesPermissionClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -252,8 +252,8 @@ private fun PermissionInfo(
         )
 
         PermissionListItem(
-            hasPermission = hasNotificationPolicyPermission,
-            onClick = onNotificationPolicyPermissionClick,
+            hasPermission = hasModesPermission,
+            onClick = onModesPermissionClick,
             content = { Text(stringResource(R.string.modesPermissionLabel)) },
             count = count,
             index = 1,
@@ -328,7 +328,7 @@ private fun checkNotificationPermission(context: Context): Boolean =
     context.checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) ==
         PackageManager.PERMISSION_GRANTED
 
-private fun checkNotificationPolicyPermission(context: Context): Boolean {
+private fun checkModesPermission(context: Context): Boolean {
     val notificationManager = context.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
     return notificationManager.isNotificationPolicyAccessGranted
 }
