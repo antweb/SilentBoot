@@ -13,8 +13,6 @@ import androidx.core.content.ContextCompat.startForegroundService
 import androidx.preference.PreferenceManager
 
 class BootReceiver : BroadcastReceiver() {
-    private val restoreDelay = 5000
-
     override fun onReceive(context: Context, intent: Intent) {
         if (intent.action != Intent.ACTION_BOOT_COMPLETED) {
             return
@@ -83,11 +81,6 @@ class BootReceiver : BroadcastReceiver() {
     }
 
     private fun handleOld(context: Context) {
-        try {
-            Thread.sleep(restoreDelay.toLong())
-        } catch (_: InterruptedException) {
-        }
-
         restoreSavedSettings(context)
     }
 }
