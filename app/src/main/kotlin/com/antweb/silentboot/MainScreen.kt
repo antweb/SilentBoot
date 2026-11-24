@@ -273,34 +273,34 @@ private fun PermissionListItem(
     val colors =
         ListItemDefaults.colors(containerColor = MaterialTheme.colorScheme.surfaceContainer)
 
-    SegmentedListItem(
-        onClick = {
-            if (!hasPermission) {
-                onClick()
-            }
-        },
-        shapes = ListItemDefaults.segmentedShapes(index, count),
-        colors = colors,
-        content = content,
-        supportingContent = {
-            if (hasPermission) {
-                Text(stringResource(R.string.permissionGrantedLabel))
-            } else {
-                Text(stringResource(R.string.permissionNotGrantedLabel))
-            }
-        },
-        trailingContent = {
-            if (!hasPermission) {
+    // No option to conditionally specify an onClick action?
+    // Use a different overload if not clickable to get proper screen reader semantics
+    if (hasPermission) {
+        SegmentedListItem(
+            shapes = ListItemDefaults.segmentedShapes(index, count),
+            colors = colors,
+            content = content,
+            supportingContent = { Text(stringResource(R.string.permissionGrantedLabel)) },
+            modifier = modifier,
+        )
+    } else {
+        SegmentedListItem(
+            onClick = onClick,
+            shapes = ListItemDefaults.segmentedShapes(index, count),
+            colors = colors,
+            content = content,
+            supportingContent = { Text(stringResource(R.string.permissionNotGrantedLabel)) },
+            trailingContent = {
                 Icon(
                     painter = painterResource(R.drawable.baseline_error_24),
                     contentDescription = stringResource(
                         R.string.permissionRequiresAttentionContentDescription,
                     ),
                 )
-            }
-        },
-        modifier = modifier,
-    )
+            },
+            modifier = modifier,
+        )
+    }
 }
 
 @Composable
